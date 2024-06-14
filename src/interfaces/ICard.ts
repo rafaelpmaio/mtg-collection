@@ -8,7 +8,7 @@ export default interface ICard {
   types?: string[];
   manaCost?: string;
   manaValue?: number;
-  colors?: string;
+  colors?: string[];
   isPromo?: boolean;
   currentPrice?: string;
   pricePaid?: string;

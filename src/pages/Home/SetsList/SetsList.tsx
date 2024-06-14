@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import Set from "./Set/Set";
 import styles from "./_setsList.module.scss";
 import { useGetFilteredSetsList } from "state/hooks/stateHooks/filteredSetsListState/useGetFilteredSetsList";

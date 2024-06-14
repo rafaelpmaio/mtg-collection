@@ -18,7 +18,7 @@ export const useHandleSelectorFilter = () => {
     if (option === "All Collections") {
       setFilteredSetsList(setsList);
     }
-    if (option === "Collect List") {
+    if (option === "Favorite List") {
       setFilteredSetsList(setsList.filter((collection) => collection.collect));
     }
     if (option === "Completed Sets") {

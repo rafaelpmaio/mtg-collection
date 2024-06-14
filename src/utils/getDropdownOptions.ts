@@ -1,6 +1,6 @@
 export const getDropdownOptions = (pathname: string) => {
   if (pathname === "/") {
-    return ["All Collections", "Collect List", "Completed Sets"];
+    return ["All Collections", "Favorite List", "Completed Sets"];
   }
   if (pathname.includes("/collection")) {
     return ["Number", "Collected", "Missing"];
