@@ -18,32 +18,46 @@ const Set = ({ set }: SetProps) => {
   const setSelectedSet = useSetSelectedSet();
 
   return (
-    <Card elevation={4} onClick={() => setSelectedSet(set)}>
-      <Link to={`/collection/${set.name}`}>
-        <CardMedia
-          component="i"
-          className={`ss ss-${set.image} ss-2x  ${set.isCompleted ? "ss-rare" : "ss-common"}`}
-        />
-        <Grid item>
-          <CardContent >
-            <Typography variant="body2">{set.name}</Typography>
-            <LinearProgress
-              variant="determinate"
-              value={percentage(set.collectedCardsTotal, set.totalSetSize)}
+    <Card
+      elevation={4}
+      onClick={() => setSelectedSet(set)}
+    >
+      <Stack direction="row">
+        <Link to={`/collection/${set.name}`} style={{width:"100%"}}>
+          <Stack direction="row" >
+            <CardMedia
+              component="i"
+              className={`ss ss-${set.image} ss-2x  ${set.isCompleted ? "ss-rare" : "ss-common"}`}
+              sx={{
+                display:"flex",
+                justifyContent:"center",
+                alignItems:"center",
+                margin:"10px"
+              }}
             />
-          </CardContent>
-        </Grid>
-      </Link>
-      <CardActions>
-        <Checkbox
-          icon={<StarOutlineIcon />}
-          checkedIcon={<StarIcon />}
-          color="primary"
-        // checkToggleFunction={(checkStatus) =>
-        //   toggleSetFromCollectList(set, checkStatus)
-        // }
-        />
-      </CardActions>
+            <CardContent sx={{
+              width:"100%"
+            }}>
+              <Typography variant="body2" >{set.name}</Typography>
+              <LinearProgress
+                variant="determinate"
+                color="success"
+                value={percentage(set.collectedCardsTotal, set.totalSetSize)}
+              />
+            </CardContent>
+          </Stack>
+        </Link>
+        <CardActions>
+          <Checkbox
+            icon={<StarOutlineIcon />}
+            checkedIcon={<StarIcon />}
+            color="primary"
+          // checkToggleFunction={(checkStatus) =>
+          //   toggleSetFromCollectList(set, checkStatus)
+          // }
+          />
+        </CardActions>
+      </Stack>
     </Card >
 
 
