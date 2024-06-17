@@ -8,6 +8,7 @@ import { getDropdownOptions } from "utils/getDropdownOptions";
 import { useGetUpdatedSet } from "state/hooks/customHooks/useGetUpdatedSet";
 import { totalSetCost } from "utils/totalSetCost";
 import { useGetScryfallData } from "state/hooks/stateHooks/scryfallDataState/useGetScryfallData";
+import { Box } from "@mui/material";
 
 const DefaultPage = () => {
   const setDropdownMenuOptions = useSetDropdownMenuOptions();
@@ -24,7 +25,7 @@ const DefaultPage = () => {
 
   return (
     <>
-      <main>
+      <Box component="main" sx={{ padding: "10px" }}>
         <section className={styles.header}>
           <div className={styles.set_infos}>
             <h2 className={styles.set_name}>{set?.name}</h2>
@@ -54,7 +55,7 @@ const DefaultPage = () => {
           />
         </section>
         <Outlet />
-      </main>
+      </Box >
     </>
   );
 };

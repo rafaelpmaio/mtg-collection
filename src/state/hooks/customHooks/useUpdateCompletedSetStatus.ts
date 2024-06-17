@@ -1,10 +1,10 @@
 import ISet from "interfaces/ISet";
-import useSetSetsList from "../stateHooks/setsListState/useSetSetsList";
+import useSetCardsSetsList from "../stateHooks/setsListState/useSetCardsSetsList";
 import { useGetSetsList } from "../stateHooks/setsListState/useGetSetsList";
 import { toast } from "react-toastify";
 
 export const useUpdateCompletedSetStatus = () => {
-  const toggleCollectFromList = useSetSetsList();
+  const toggleCollectFromList = useSetCardsSetsList();
   const prevList = useGetSetsList();
 
   return (selectedSet: ISet | undefined) => {

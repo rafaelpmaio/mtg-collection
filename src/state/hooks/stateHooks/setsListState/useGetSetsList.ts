@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
-import { setsListState } from "state/atom";
+import { cardsSetsListState } from "state/atom";
 
 export const useGetSetsList = () => {
-  const list = useRecoilValue(setsListState);
+  const list = useRecoilValue(cardsSetsListState);
   return list;
 };

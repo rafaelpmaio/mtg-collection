@@ -3,7 +3,7 @@ import { IScryfallData } from "interfaces/IScryfallData";
 import ISet from "interfaces/ISet";
 import { atom } from "recoil";
 
-export const setsListState = atom<ISet[]>({
+export const cardsSetsListState = atom<ISet[]>({
   key: "setsListState",
   default: [],
 });

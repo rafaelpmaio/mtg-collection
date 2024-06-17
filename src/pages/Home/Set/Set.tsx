@@ -1,61 +1,55 @@
 import ISet from "interfaces/ISet";
 import { Link } from "react-router-dom";
-import { useToggleSetFromCollectList } from "state/hooks/customHooks/useToggleSetFromCollectList";
+import { useToggleFromFavorite } from "state/hooks/customHooks/useToggleFromFavorite";
 import { useSetSelectedSet } from "state/hooks/stateHooks/selectedSetState/useSetSelectedSet";
 import styles from "./_set.module.scss";
 import "keyrune";
-import { percentage } from "utils/percentage";
-import { Card, CardActions, CardContent, Stack, Typography, Box, CardMedia, Checkbox, Grid, LinearProgress } from "@mui/material";
+import { Card, CardActions, CardContent, Stack, Typography, CardMedia, Checkbox, FormControlLabel } from "@mui/material";
 import StarIcon from '@mui/icons-material/Star';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
+import React, { useEffect, useState } from "react";
+import SetInfos from "./SetInfos";
 
 interface SetProps {
   set: ISet;
 }
 
 const Set = ({ set }: SetProps) => {
-  const toggleSetFromCollectList = useToggleSetFromCollectList();
+  const toggleSetFromCollectList = useToggleFromFavorite();
   const setSelectedSet = useSetSelectedSet();
+
+  const [favorite, setFavorite] = useState(false)
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFavorite(event.target.checked)
+  }
+
+  // useEffect(
+  //   () => {
+  //     toggleSetFromCollectList(set, favorite)
+  //   }, [favorite]
+  // )
 
   return (
     <Card
       elevation={4}
       onClick={() => setSelectedSet(set)}
+    // sx={{
+    //   bgcolor: set.collect ? "#FFFFFF" : "#eeeeee"
+    // }}
     >
       <Stack direction="row">
-        <Link to={`/collection/${set.name}`} style={{width:"100%"}}>
-          <Stack direction="row" >
-            <CardMedia
-              component="i"
-              className={`ss ss-${set.image} ss-2x  ${set.isCompleted ? "ss-rare" : "ss-common"}`}
-              sx={{
-                display:"flex",
-                justifyContent:"center",
-                alignItems:"center",
-                margin:"10px"
-              }}
-            />
-            <CardContent sx={{
-              width:"100%"
-            }}>
-              <Typography variant="body2" >{set.name}</Typography>
-              <LinearProgress
-                variant="determinate"
-                color="success"
-                value={percentage(set.collectedCardsTotal, set.totalSetSize)}
-              />
-            </CardContent>
-          </Stack>
+        <Link to={`/collection/${set.name}`} style={{ width: "100%" }}>
+          <SetInfos set={set} />
         </Link>
         <CardActions>
-          <Checkbox
+          <FormControlLabel label control={<Checkbox
+            checked={favorite}
             icon={<StarOutlineIcon />}
-            checkedIcon={<StarIcon />}
+            checkedIcon={<StarIcon sx={{ color: '#FFD700' }} />}
             color="primary"
-          // checkToggleFunction={(checkStatus) =>
-          //   toggleSetFromCollectList(set, checkStatus)
-          // }
-          />
+            onChange={handleChange}
+          />} />
         </CardActions>
       </Stack>
     </Card >

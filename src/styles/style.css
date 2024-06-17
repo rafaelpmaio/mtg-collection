@@ -5,11 +5,9 @@ html, body {
   font-family: "Sorts Mill Goudy", serif;
   min-height: 100vh;
   color: #3E001F;
-}
-
-html, body {
   margin: 0;
   padding: 0;
+  background-color: #eeeeee;
 }
 
 ul {
