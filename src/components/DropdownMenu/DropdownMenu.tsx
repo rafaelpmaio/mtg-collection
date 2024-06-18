@@ -1,29 +1,48 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useHandleSelectorFilter } from "state/hooks/customHooks/useHandleSelectorFilter";
-import styles from "./_dropdownMenu.module.scss";
+import { TextField, MenuItem } from "@mui/material";
+import { useLocation } from "react-router-dom";
+import { getDropdownOptions } from "utils/getDropdownOptions";
 
-interface SelectorProps {
-  options: string[];
-  defaultOption?: string;
-}
 
-const DropdownMenu = ({ options, defaultOption }: SelectorProps) => {
-  const optionsName = options.map((option) => option);
+const DropdownMenu = () => {
+  const [option, setOption] = useState<string>("")
+
+  var optionsArr: string[] = [];
+  const pathname = useLocation().pathname;
+
   const handleFilter = useHandleSelectorFilter();
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setOption(event.target.value as string)
+  }
+
   useEffect(() => {
-    defaultOption && handleFilter(defaultOption);
-  }, [handleFilter, defaultOption]);
+    optionsArr = getDropdownOptions(pathname)
+
+    !option
+      ? handleFilter(optionsArr[0])
+      : handleFilter(option)
+  }, [handleFilter, pathname ]);
 
   return (
-    <select
-      className={styles.container}
-      onChange={(event) => handleFilter(event.target.value)}
+    <TextField
+      label="select"
+      select
+      onChange={handleChange}
+      sx={{
+        width: 200
+      }}
     >
-      {optionsName.map((option) => (
-        <option key={option}>{option}</option>
+      {optionsArr.map((option) => (
+        <MenuItem
+          value={option}
+        >
+          {option}
+        </MenuItem>
       ))}
-    </select>
+    </TextField>
+
   );
 };
 

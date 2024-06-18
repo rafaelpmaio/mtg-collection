@@ -1,3 +1,4 @@
+import { Checkbox } from "@mui/material";
 import styles from "./_checkbox.module.scss";
 
 interface CheckboxProps {
@@ -5,7 +6,7 @@ interface CheckboxProps {
   children?: string;
 }
 
-const Checkbox = ({ checkToggleFunction, children }: CheckboxProps) => {
+const CheckboxC = ({ checkToggleFunction, children }: CheckboxProps) => {
   return (
     <div className={styles.container}>
       <input
@@ -18,4 +19,4 @@ const Checkbox = ({ checkToggleFunction, children }: CheckboxProps) => {
   );
 };
 
-export default Checkbox;
+export default CheckboxC;

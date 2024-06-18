@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Checkbox from "./Checkbox";
+import CheckboxC from ".";
 
 const mockToggleCheckedStatusFunction = jest.fn();
 
@@ -8,7 +8,7 @@ describe("given an checkbox", () => {
   test(`the checkedFunction is called when checked`, async () => {
     const user = userEvent.setup();
 
-    render(<Checkbox checkToggleFunction={mockToggleCheckedStatusFunction} />);
+    render(<CheckboxC checkToggleFunction={mockToggleCheckedStatusFunction} />);
 
     const checkbox = screen.getByRole("checkbox");
     await user.click(checkbox);
@@ -20,7 +20,7 @@ describe("given an checkbox", () => {
   test(`the uncheckedFunction is called when UNchecked`, async () => {
     const user = userEvent.setup();
 
-    render(<Checkbox checkToggleFunction={mockToggleCheckedStatusFunction} />);
+    render(<CheckboxC checkToggleFunction={mockToggleCheckedStatusFunction} />);
 
     const checkbox = screen.getByRole("checkbox");
     await user.click(checkbox);

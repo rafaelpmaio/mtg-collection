@@ -1,6 +1,6 @@
 import ICard from "interfaces/ICard";
 import styles from "./_card.module.scss";
-import Checkbox from "components/Checkbox/Checkbox";
+import CheckboxC from "components/CheckboxC";
 import { useToggleCardCollectStatus } from "state/hooks/customHooks/useToggleCardCollectStatus";
 import { Link } from "react-router-dom";
 import { useGetScryfallCard } from "state/hooks/customHooks/useGetScryfallCard";
@@ -36,13 +36,13 @@ const Card = ({ card }: CardProps) => {
           <b className={styles.highlight}>{priceUsd ? priceUsd : "0"}</b>
         </p>
       </div>
-      <Checkbox
+      <CheckboxC
         checkToggleFunction={(checkStatus) =>
           toggleCardCollectStatus(card, checkStatus)
         }
       >
         Collected
-      </Checkbox>
+      </CheckboxC>
     </li>
   );
 };

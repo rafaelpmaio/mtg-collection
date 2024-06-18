@@ -1,5 +1,5 @@
 import SetPage from "pages/SetPage/SetPage";
-import DefaultPage from "pages/DefaultPage/DefaultPage";
+import DefaultPage from "pages/DefaultPage";
 import Home from "pages/Home/Home";
 import { Route, Routes } from "react-router-dom";
 import { RecoilRoot } from "recoil";

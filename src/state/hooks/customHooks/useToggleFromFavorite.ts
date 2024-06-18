@@ -8,17 +8,17 @@ export const useToggleFromFavorite = () => {
   const setsList = useGetSetsList();
 
   return useCallback((selectedSet: ISet, checkStatus: boolean = false) => {
-    setCardsSetList(
-      setsList.map((set) => {
-        if (set.id === selectedSet.id) {
-          return {
-            ...set,
-            collect: checkStatus,
-          };
-        }
-        return set;
-      })
-    );
+    const index = setsList.findIndex(set => set.id === selectedSet.id)
+
+    const updatedSet: ISet = {
+      ...setsList[index],
+      collect: checkStatus
+    }
+
+    setCardsSetList([...setsList.slice(0, index), updatedSet, ...setsList.slice(index + 1)])
+
+
+
   }, [setCardsSetList, setsList]
   )
 }

@@ -16,11 +16,13 @@ const Home = () => {
   }, [])
 
   return (
-    <Box sx={{
-      display: "grid",
-      gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, max(260px, 100%/5 - 0.5rem)), 1fr))",
-      gap: "0.5rem",
-    }}>
+    <Box
+      component="section"
+      sx={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, max(260px, 100%/5 - 0.5rem)), 1fr))",
+        gap: "0.5rem",
+      }}>
       {
         setsList.map((set) => (
           <Set set={set} key={set.id} />

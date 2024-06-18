@@ -4,7 +4,7 @@ import { useToggleFromFavorite } from "state/hooks/customHooks/useToggleFromFavo
 import { useSetSelectedSet } from "state/hooks/stateHooks/selectedSetState/useSetSelectedSet";
 import styles from "./_set.module.scss";
 import "keyrune";
-import { Card, CardActions, CardContent, Stack, Typography, CardMedia, Checkbox, FormControlLabel } from "@mui/material";
+import { Card, CardActions, CardContent, Stack, Typography, CardMedia, FormControlLabel, Checkbox } from "@mui/material";
 import StarIcon from '@mui/icons-material/Star';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import React, { useEffect, useState } from "react";
@@ -24,19 +24,15 @@ const Set = ({ set }: SetProps) => {
     setFavorite(event.target.checked)
   }
 
-  // useEffect(
-  //   () => {
-  //     toggleSetFromCollectList(set, favorite)
-  //   }, [favorite]
-  // )
+  useEffect(() => {
+    toggleSetFromCollectList(set, favorite)
+
+  }, [favorite])
 
   return (
     <Card
       elevation={4}
       onClick={() => setSelectedSet(set)}
-    // sx={{
-    //   bgcolor: set.collect ? "#FFFFFF" : "#eeeeee"
-    // }}
     >
       <Stack direction="row">
         <Link to={`/collection/${set.name}`} style={{ width: "100%" }}>
@@ -71,7 +67,7 @@ const Set = ({ set }: SetProps) => {
     //     <p>{set.name}</p>
     //     <p>{`${percentage(set.collectedCardsTotal, set.totalSetSize)}%`}</p>
     //   </Link>
-    //   <Checkbox
+    //   <CheckboxC
     //     checkToggleFunction={(checkStatus) =>
     //       toggleSetFromCollectList(set, checkStatus)
     //     }

@@ -13,7 +13,7 @@ jest.mock("state/hooks/useHandleSelectorFilter", () => {
 });
 
 describe("given a dropdown menu", () => {
-  test("all it's options are shown", () => {
+DropdownMenu.test  test("all it's options are shown", () => {
     render(<DropdownMenu options={optionsList} />, { wrapper: RecoilRoot });
 
     const options = screen.getAllByRole("option");

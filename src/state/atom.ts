@@ -28,11 +28,6 @@ export const scryfallCardsDataState = atom<IScryfallData[]>({
   default:[]
 })
 
-export const dropdownMenuOptionsState = atom<string[]>({
-  key: "dropdownMenuOptionsState",
-  default: [],
-});
-
 export const saveSetInMemoryState = atom<string[]>({
   key:'saveSetInMemoryState',
   default:[]
