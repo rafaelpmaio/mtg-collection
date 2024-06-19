@@ -1,11 +1,11 @@
 import { Outlet, useLocation } from "react-router-dom";
-import styles from "./_defaultPage.module.scss";
-import DropdownMenu from "components/DropdownMenu/DropdownMenu";
+import DropdownMenu from "components/DropdownMenu";
 // import { useSetDropdownMenuOptions } from "state/hooks/stateHooks/dropdownMenuOptionsState/useSetDropdownMenuOptions";
 import { useGetUpdatedSet } from "state/hooks/customHooks/useGetUpdatedSet";
-import { totalSetCost } from "utils/totalSetCost";
+import { calculateTotalSetCost } from "utils/calculateTotalSetCost";
 import { useGetScryfallData } from "state/hooks/stateHooks/scryfallDataState/useGetScryfallData";
-import { Box } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
+import { useEffect } from "react";
 
 const DefaultPage = () => {
   // const setDropdownMenuOptions = useSetDropdownMenuOptions();
@@ -15,39 +15,41 @@ const DefaultPage = () => {
   const scryfallData = useGetScryfallData();
 
   // useEffect(() => {
-  //   setDropdownMenuOptions(getDropdownOptions(pathname));
-  // }, [location]);
+  // setDropdownMenuOptions(getDropdownOptions(pathname));
+  // }, [ set]);
 
   return (
-    <>
       <Box component="main" sx={{ padding: "10px" }}>
-        <section className={styles.header}>
-          <div className={styles.set_infos}>
-            <h2 className={styles.set_name}>{set?.name}</h2>
-            <p>
-              Collected:{" "}
+        <Box
+          height={200}
+          textAlign="center"
+          component="section"
+        >
+          <Stack spacing={1}>
+            <Typography
+              variant="h4"
+              component="h1"
+              sx={{fontFamily:"inherit"}}>
+              {set?.name}
+            </Typography>
+            <Typography variant="body1"> Collected:
               <b>
-                {set?.collectedCardsTotal} /{set?.totalSetSize}{" "}
+                {set?.collectedCardsTotal} /{set?.totalSetSize}
               </b>
-            </p>
+            </Typography>
             {String(pathname).includes("/collection")
-              && (
-                <>
-                  <p>
-                    Total Set Cost (usd):
-                    <b>{set ? totalSetCost(set, scryfallData) : "0"}</b>
-                  </p>
-                  {/* <p>
-                  Total Invested (usd): <b>{set ? totalInvested(set) : "0"}</b>
-                </p> */}
-                </>
-              )}
-          </div>
+              &&
+              <Typography> Total Set Cost: US$
+                <b>
+                  {set && calculateTotalSetCost(set, scryfallData)}
+                </b>
+              </Typography>
+            }
+          </Stack>
           <DropdownMenu />
-        </section>
+        </Box>
         <Outlet />
       </Box >
-    </>
   );
 };
 

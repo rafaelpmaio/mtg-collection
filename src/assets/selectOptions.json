@@ -1,0 +1,18 @@
+[
+    {
+        "pathname": "",
+        "options": [
+            "All",
+            "Favorite",
+            "Completed"
+        ]
+    },
+    {
+        "pathname": "collection",
+        "options": [
+            "Number",
+            "Collected",
+            "Missing"
+        ]
+    }
+]

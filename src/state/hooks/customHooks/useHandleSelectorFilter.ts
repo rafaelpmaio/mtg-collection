@@ -2,6 +2,12 @@ import { useGetSelectedSet } from "../stateHooks/selectedSetState/useGetSelected
 import { useSetFilteredCardsList } from "../stateHooks/filteredCardsListState/useSetFilteredCardsList";
 import { useSetFilteredSetsList } from "../stateHooks/filteredSetsListState/useSetFilteredSetsList";
 import { useGetSetsList } from "../stateHooks/setsListState/useGetSetsList";
+import useSetCardsSetsList from "../stateHooks/setsListState/useSetCardsSetsList";
+import ISet from "interfaces/ISet";
+import ICard from "interfaces/ICard";
+
+type FilterFunction = () => ISet[];
+
 
 export const useHandleSelectorFilter = () => {
   const setsList = useGetSetsList();
@@ -9,24 +15,21 @@ export const useHandleSelectorFilter = () => {
   const setFilteredSetsList = useSetFilteredSetsList();
   const setFilteredCardsList = useSetFilteredCardsList();
 
+  //Ver se possivel utilizar apenas o selectedSet, parece desnecessário este filtro
   const updatedCollection = setsList.find(
     (collection) => collection.id === selectedSet?.id
   );
 
+  const filterOptions: Record<string, FilterFunction> = {
+    All: () => setsList,
+    Favorite: () => setsList.filter(collection => collection.collect),
+    Completed: () => setsList.filter(collection => collection.isCompleted),
+  };
+
   return (option: string) => {
-    // Filters from HomePage
-    if (option === "All Collections") {
-      setFilteredSetsList(setsList);
-    }
-    if (option === "Favorite List") {
-      setFilteredSetsList(setsList.filter((collection) => collection.collect));
-    }
-    if (option === "Completed Sets") {
-      setFilteredSetsList(
-        setsList.filter((collection) => collection.isCompleted)
-      );
-    }
-    // Filters from CollectionPage
+
+    const filteredList = filterOptions[option] ? filterOptions[option]() : [];
+    setFilteredSetsList(filteredList);
     if (option === "Number") {
       //FALTA IMPLEMENTAR
       // const sortedList = updatedCollection?.cards.sort(
@@ -38,15 +41,15 @@ export const useHandleSelectorFilter = () => {
     if (option === "Collected") {
       return updatedCollection
         ? setFilteredCardsList(
-            updatedCollection.cards.filter((card) => card.isCollected)
-          )
+          updatedCollection.cards.filter((card) => card.isCollected)
+        )
         : null;
     }
     if (option === "Missing") {
       return updatedCollection
         ? setFilteredCardsList(
-            updatedCollection.cards.filter((card) => !card.isCollected)
-          )
+          updatedCollection.cards.filter((card) => !card.isCollected)
+        )
         : null;
     }
   };
