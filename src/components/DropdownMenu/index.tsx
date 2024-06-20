@@ -5,22 +5,28 @@ import { useLocation } from "react-router-dom";
 import selectOptions from "assets/selectOptions.json"
 
 
-const defaultOption = selectOptions[0].options[0];
 
 const DropdownMenu = () => {
-  const [option, setOption] = useState<string>(defaultOption)
-  const [pathOptions, setPathOptions] = useState<{ pathname: string, [key: string]: any }>()
+  const [pathOptions, setPathOptions] = useState<{ pathname: string, options: string[] }>()
+  const [option, setOption] = useState<string>("")
 
   const handleFilter = useHandleSelectorFilter();
   const pathname = useLocation().pathname.split("/")[1];
+
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOption(event.target.value as string)
   }
 
   useEffect(() => {
-    setPathOptions(selectOptions.find(option => option.pathname === pathname))
-    handleFilter(option)
+    const newOptions = selectOptions.find(option => option.pathname === pathname);
+    if (newOptions) {
+      setPathOptions(newOptions);
+      // if (!newOptions.options.includes(option)) {
+        setOption(newOptions.options[0])
+        handleFilter(option)
+      // }
+    }
   }, [handleFilter, pathname]);
 
   return (
@@ -28,17 +34,18 @@ const DropdownMenu = () => {
       label="select"
       select
       onChange={handleChange}
-      defaultValue={defaultOption}
+      value={option}
       sx={{
         width: 200
       }}
     >
       {pathOptions
-        && pathOptions.options.map((option: string) => (
+        && pathOptions.options.map((opt: string) => (
           <MenuItem
-            value={option}
+            value={opt}
+            key={opt}
           >
-            {option}
+            {opt}
           </MenuItem>
         ))
       }

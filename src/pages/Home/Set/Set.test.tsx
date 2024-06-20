@@ -60,7 +60,7 @@ describe("given an set list item", () => {
     const user = userEvent.setup();
     render(
       <RecoilRoot>
-        <Set set={set} />
+        <Set set={set} key={set.id} />
       </RecoilRoot>,
       { wrapper: BrowserRouter }
     );
@@ -76,7 +76,7 @@ describe("given an set list item", () => {
     const user = userEvent.setup();
     render(
       <RecoilRoot>
-        <Set set={set} />
+        <Set set={set} key={set.id}/>
       </RecoilRoot>,
       { wrapper: BrowserRouter }
     );

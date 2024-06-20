@@ -12,9 +12,10 @@ import SetInfos from "./SetInfos";
 
 interface SetProps {
   set: ISet;
+  key: string
 }
 
-const Set = ({ set }: SetProps) => {
+const Set = ({ set, key }: SetProps) => {
   const toggleSetFromCollectList = useToggleFromFavorite();
   const setSelectedSet = useSetSelectedSet();
 
@@ -33,6 +34,7 @@ const Set = ({ set }: SetProps) => {
     <Card
       elevation={4}
       onClick={() => setSelectedSet(set)}
+      key={key}
     >
       <Stack direction="row">
         <Link to={`/collection/${set.name}`} style={{ width: "100%" }}>
