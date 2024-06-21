@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useHandleSelectorFilter } from "state/hooks/customHooks/useHandleSelectorFilter";
 import { TextField, MenuItem } from "@mui/material";
 import { useLocation } from "react-router-dom";
-import selectOptions from "assets/selectOptions.json"
+import optionsArr from "assets/optionsArr.json"
 
 
 
@@ -19,15 +19,16 @@ const DropdownMenu = () => {
   }
 
   useEffect(() => {
-    const newOptions = selectOptions.find(option => option.pathname === pathname);
+    const newOptions = optionsArr.find(option => option.pathname === pathname);
     if (newOptions) {
       setPathOptions(newOptions);
-      // if (!newOptions.options.includes(option)) {
-        setOption(newOptions.options[0])
-        handleFilter(option)
-      // }
+      setOption(newOptions.options[0])
     }
-  }, [handleFilter, pathname]);
+  }, [pathname]);
+
+  useEffect(() => {
+    handleFilter(option)
+  }, [option])
 
   return (
     <TextField

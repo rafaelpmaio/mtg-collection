@@ -15,42 +15,47 @@ export const useHandleSelectorFilter = () => {
   const setFilteredSetsList = useSetFilteredSetsList();
   const setFilteredCardsList = useSetFilteredCardsList();
 
-  //Ver se possivel utilizar apenas o selectedSet, parece desnecessário este filtro
-  const updatedCollection = setsList.find(
-    (collection) => collection.id === selectedSet?.id
-  );
+  const cardsList = selectedSet?.cards || [];
+  console.log(cardsList)
 
-  const filterOptions: Record<string, FilterFunction> = {
+  const filterOptions_sets: Record<string, FilterFunction> = {
     All: () => setsList,
     Favorite: () => setsList.filter(collection => collection.collect),
     Completed: () => setsList.filter(collection => collection.isCompleted),
   };
 
+  //renderizando muitas vezes as cartas
+
   return (option: string) => {
 
-    const filteredList = filterOptions[option] ? filterOptions[option]() : [];
+    const filteredList = filterOptions_sets[option] ? filterOptions_sets[option]() : [];
     setFilteredSetsList(filteredList);
     if (option === "Number") {
-      //FALTA IMPLEMENTAR
-      // const sortedList = updatedCollection?.cards.sort(
-      //   (a, b) => Number(a.number) - Number(b.number)
-      // );
-      setFilteredCardsList(updatedCollection ? updatedCollection.cards : []);
+      setFilteredCardsList(cardsList);
     }
 
     if (option === "Collected") {
-      return updatedCollection
-        ? setFilteredCardsList(
-          updatedCollection.cards.filter((card) => card.isCollected)
-        )
-        : null;
+      const filteredCards = cardsList.filter((card) => card.isCollected);
+      setFilteredCardsList(filteredCards);
     }
     if (option === "Missing") {
-      return updatedCollection
-        ? setFilteredCardsList(
-          updatedCollection.cards.filter((card) => !card.isCollected)
-        )
-        : null;
+      const filteredCards = cardsList.filter((card) => !card.isCollected);
+      setFilteredCardsList(filteredCards)
     }
   };
 };
+
+
+// const cardsFilterOptions: Record<string, CardsFilterFunction> = {
+//   Number: () => updatedCollection?.cards || [],
+//   Collected: () => updatedCollection?.cards.filter((card) => card.isCollected) || [],
+//   Missing: () => updatedCollection?.cards.filter((card) => !card.isCollected) || [],
+// };
+
+// return (option: string) => {
+//   const setsFilteredList = setsFilterOptions[option] ? setsFilterOptions[option]() : [];
+//   setFilteredSetsList(setsFilteredList);
+  
+//   const cardsFilteredList = cardsFilterOptions[option] ? cardsFilterOptions[option]() : [];
+//   setFilteredCardsList(cardsFilteredList)
+// };

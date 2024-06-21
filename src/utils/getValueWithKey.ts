@@ -1,6 +1,6 @@
 export const getValueWithKey = (objKey: string, obj: any | undefined) => {
   if (!obj) {
-    console.log("object not found");
+    // console.log("object not found");
     return;
   }
 

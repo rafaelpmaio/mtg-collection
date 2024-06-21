@@ -17,6 +17,8 @@ const Card = ({ card }: CardProps) => {
   const imageSmall = getValueWithKey("small", scryfallCard?.images);
   const priceUsd = getValueWithKey("usd", scryfallCard?.prices);
 
+  console.log(scryfallCard)
+
   return (
     <li
       className={`${styles.card}  ${
