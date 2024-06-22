@@ -18,16 +18,19 @@ const DropdownMenu = () => {
     setOption(event.target.value as string)
   }
 
+  console.log("renderizou o DDMenu novamente")
+
   useEffect(() => {
+    console.log("entrou aqui no useEffect do DDMenu")
     const newOptions = optionsArr.find(option => option.pathname === pathname);
     if (newOptions) {
       setPathOptions(newOptions);
-      setOption(newOptions.options[0])
+      if (newOptions.options[0] !== option) setOption(newOptions.options[0])
     }
   }, [pathname]);
 
   useEffect(() => {
-    handleFilter(option)
+    // if (option !== "") handleFilter(option)
   }, [option])
 
   return (

@@ -11,6 +11,8 @@ const DefaultPage = () => {
 
   const scryfallData = useGetScryfallData();
 
+  console.log("renderizou o DefaultPage")
+
   return (
       <Box component="main" sx={{ padding: "10px" }}>
         <Box

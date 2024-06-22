@@ -5,6 +5,7 @@ import { useGetSetsList } from "../stateHooks/setsListState/useGetSetsList";
 import useSetCardsSetsList from "../stateHooks/setsListState/useSetCardsSetsList";
 import ISet from "interfaces/ISet";
 import ICard from "interfaces/ICard";
+import { useCallback } from "react";
 
 type FilterFunction = () => ISet[];
 
@@ -24,9 +25,11 @@ export const useHandleSelectorFilter = () => {
     Completed: () => setsList.filter(collection => collection.isCompleted),
   };
 
-  //renderizando muitas vezes as cartas
+  //renderizando muitas vezes as cartas, problema NÃO está aqui!, o DropdownMenu está renderizando 6x mesmo sem a função
 
-  return (option: string) => {
+  console.log("entrou no useHandleSelectorFilter")
+
+  const handleFilterChange = useCallback((option: string) => {
 
     const filteredList = filterOptions_sets[option] ? filterOptions_sets[option]() : [];
     setFilteredSetsList(filteredList);
@@ -42,7 +45,9 @@ export const useHandleSelectorFilter = () => {
       const filteredCards = cardsList.filter((card) => !card.isCollected);
       setFilteredCardsList(filteredCards)
     }
-  };
+  },[cardsList, filterOptions_sets, setFilteredSetsList, setFilteredCardsList]) //pode retirar o setcardslist quando criar a filterOptions_cards
+
+return handleFilterChange;
 };
 
 
