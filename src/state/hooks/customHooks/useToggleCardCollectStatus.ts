@@ -1,13 +1,14 @@
 import ICard from "interfaces/ICard";
-import { useGetUpdatedSet } from "./useGetUpdatedSet";
 import useSetCardsSetsList from "../stateHooks/setsListState/useSetCardsSetsList";
 import { useGetSetsList } from "../stateHooks/setsListState/useGetSetsList";
 import { toast } from "react-toastify";
+import { useGetSelectedSet } from "../stateHooks/selectedSetState/useGetSelectedSet";
 
 export const useToggleCardCollectStatus = () => {
   const prevList = useGetSetsList();
   const updateSetsList = useSetCardsSetsList();
-  const setOfTheCard = useGetUpdatedSet();
+  // const setOfTheCard = useGetUpdatedSet();
+  const setOfTheCard = useGetSelectedSet();
   const calculateCollectedTotal = (cardsList: ICard[]) => {
     const collectedTotal = cardsList.reduce(
       (accumulator, card) => accumulator + Number(card.isCollected),

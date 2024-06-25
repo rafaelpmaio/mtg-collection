@@ -7,7 +7,7 @@ import optionsArr from "assets/optionsArr.json"
 
 
 const DropdownMenu = () => {
-  const [pathOptions, setPathOptions] = useState<{ pathname: string, options: string[] }>()
+  const [pathOptions, setPathOptions] = useState<{ pathname: string, options: string[] } | null>(null)
   const [option, setOption] = useState<string>("")
 
   const handleFilter = useHandleSelectorFilter();
@@ -20,17 +20,19 @@ const DropdownMenu = () => {
 
   console.log("renderizou o DDMenu novamente")
 
+  //só está entrando no useEffect 1x, aqui está ok
   useEffect(() => {
     console.log("entrou aqui no useEffect do DDMenu")
     const newOptions = optionsArr.find(option => option.pathname === pathname);
     if (newOptions) {
       setPathOptions(newOptions);
       if (newOptions.options[0] !== option) setOption(newOptions.options[0])
-    }
+      }
   }, [pathname]);
 
   useEffect(() => {
-    // if (option !== "") handleFilter(option)
+    console.log("entrou aqui no useEffect 2 do DDMenu")
+    if (option !== "") handleFilter(option)
   }, [option])
 
   return (

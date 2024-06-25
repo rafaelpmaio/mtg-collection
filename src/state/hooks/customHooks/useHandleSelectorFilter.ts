@@ -2,12 +2,12 @@ import { useGetSelectedSet } from "../stateHooks/selectedSetState/useGetSelected
 import { useSetFilteredCardsList } from "../stateHooks/filteredCardsListState/useSetFilteredCardsList";
 import { useSetFilteredSetsList } from "../stateHooks/filteredSetsListState/useSetFilteredSetsList";
 import { useGetSetsList } from "../stateHooks/setsListState/useGetSetsList";
-import useSetCardsSetsList from "../stateHooks/setsListState/useSetCardsSetsList";
 import ISet from "interfaces/ISet";
-import ICard from "interfaces/ICard";
 import { useCallback } from "react";
+import ICard from "interfaces/ICard";
 
-type FilterFunction = () => ISet[];
+type SetsFilterFunction = () => ISet[];
+type CardsFilterFunction = () => ICard[];
 
 
 export const useHandleSelectorFilter = () => {
@@ -17,50 +17,32 @@ export const useHandleSelectorFilter = () => {
   const setFilteredCardsList = useSetFilteredCardsList();
 
   const cardsList = selectedSet?.cards || [];
-  console.log(cardsList)
+  console.log("entrou no useHandleSelectorFilter")
 
-  const filterOptions_sets: Record<string, FilterFunction> = {
+  const filterOptions_sets: Record<string, SetsFilterFunction> = {
     All: () => setsList,
     Favorite: () => setsList.filter(collection => collection.collect),
     Completed: () => setsList.filter(collection => collection.isCompleted),
   };
 
+  const filterOptions_cards: Record<string, CardsFilterFunction> = {
+    Number: () => cardsList || [],
+    Collected: () => cardsList.filter((card) => card.isCollected) || [],
+    Missing: () => cardsList.filter((card) => !card.isCollected) || [],
+  };
+
   //renderizando muitas vezes as cartas, problema NÃO está aqui!, o DropdownMenu está renderizando 6x mesmo sem a função
 
-  console.log("entrou no useHandleSelectorFilter")
 
   const handleFilterChange = useCallback((option: string) => {
 
-    const filteredList = filterOptions_sets[option] ? filterOptions_sets[option]() : [];
-    setFilteredSetsList(filteredList);
-    if (option === "Number") {
-      setFilteredCardsList(cardsList);
-    }
+    const filteredSetsList = filterOptions_sets[option] ? filterOptions_sets[option]() : [];
+    setFilteredSetsList(filteredSetsList);
 
-    if (option === "Collected") {
-      const filteredCards = cardsList.filter((card) => card.isCollected);
-      setFilteredCardsList(filteredCards);
-    }
-    if (option === "Missing") {
-      const filteredCards = cardsList.filter((card) => !card.isCollected);
-      setFilteredCardsList(filteredCards)
-    }
-  },[cardsList, filterOptions_sets, setFilteredSetsList, setFilteredCardsList]) //pode retirar o setcardslist quando criar a filterOptions_cards
+    const cardsFilteredList = filterOptions_cards[option] ? filterOptions_cards[option]() : [];
+    setFilteredCardsList(cardsFilteredList)
+    
+  }, [cardsList, filterOptions_sets, setFilteredSetsList, setFilteredCardsList]) //pode retirar o setcardslist quando criar a filterOptions_cards
 
-return handleFilterChange;
+  return handleFilterChange;
 };
-
-
-// const cardsFilterOptions: Record<string, CardsFilterFunction> = {
-//   Number: () => updatedCollection?.cards || [],
-//   Collected: () => updatedCollection?.cards.filter((card) => card.isCollected) || [],
-//   Missing: () => updatedCollection?.cards.filter((card) => !card.isCollected) || [],
-// };
-
-// return (option: string) => {
-//   const setsFilteredList = setsFilterOptions[option] ? setsFilterOptions[option]() : [];
-//   setFilteredSetsList(setsFilteredList);
-  
-//   const cardsFilteredList = cardsFilterOptions[option] ? cardsFilterOptions[option]() : [];
-//   setFilteredCardsList(cardsFilteredList)
-// };
