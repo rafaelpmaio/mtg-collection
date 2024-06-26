@@ -15,7 +15,7 @@ const SetPage = () => {
   useEffect(() => {
     updateCompletedStatus(set ? set : undefined);
     buildScryfallData(cardsList);
-  }, [cardsList]);
+  }, []);
 
   return (
     <div className={styles.container}>

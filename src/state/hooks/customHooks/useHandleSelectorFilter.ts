@@ -25,14 +25,12 @@ export const useHandleSelectorFilter = () => {
     Completed: () => setsList.filter(collection => collection.isCompleted),
   };
 
+
   const filterOptions_cards: Record<string, CardsFilterFunction> = {
-    Number: () => cardsList || [],
-    Collected: () => cardsList.filter((card) => card.isCollected) || [],
-    Missing: () => cardsList.filter((card) => !card.isCollected) || [],
+    Number: () => cardsList,
+    Collected: () => cardsList.filter((card) => card.isCollected),
+    Missing: () => cardsList.filter((card) => !card.isCollected),
   };
-
-  //renderizando muitas vezes as cartas, problema NÃO está aqui!, o DropdownMenu está renderizando 6x mesmo sem a função
-
 
   const handleFilterChange = useCallback((option: string) => {
 
@@ -41,8 +39,8 @@ export const useHandleSelectorFilter = () => {
 
     const cardsFilteredList = filterOptions_cards[option] ? filterOptions_cards[option]() : [];
     setFilteredCardsList(cardsFilteredList)
-    
-  }, [cardsList, filterOptions_sets, setFilteredSetsList, setFilteredCardsList]) //pode retirar o setcardslist quando criar a filterOptions_cards
+
+  }, [setsList, cardsList, filterOptions_sets, filterOptions_cards, setFilteredSetsList, setFilteredCardsList])
 
   return handleFilterChange;
 };

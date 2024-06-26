@@ -8,6 +8,7 @@ import { IScryfallData } from "interfaces/IScryfallData";
 import { toast } from "react-toastify";
 
 export const useBuildScryfallData = () => {
+  console.log("entrou no build scryfall data")
   const setScryfallData = useSetScryfallData();
   const saveSetInMemory = useSaveSetInMemory();
   const setsInMemory = useGetSetsSavedInMemory();
@@ -18,6 +19,7 @@ export const useBuildScryfallData = () => {
       toast.error("no Set found!");
       return;
     }
+    console.log("teste", cardsList)
 
     if (!setsInMemory.includes(selectedSet.id)) {
       const loading = toast.loading('give me a minute to load the cards!')
@@ -27,6 +29,7 @@ export const useBuildScryfallData = () => {
             .get(card.scryfallId)
             .then((scryfallResponse) => {
               const scryfallData = scryfallResponse.data;
+              console.log("scryfallData", scryfallData)
               let scryfallCard: IScryfallData = {
                 id: card.id,
                 prices: scryfallData.prices,
@@ -39,10 +42,11 @@ export const useBuildScryfallData = () => {
       );
 
       Promise.all(scryfallCardArray).then((scryfallCardArray) => {
+        console.log("arra", scryfallCardArray)
         setScryfallData(scryfallCardArray);
         saveSetInMemory(selectedSet);
-        toast.update(loading, {render:'There they are!', type: "success", isLoading:false, autoClose:2000})
+        toast.update(loading, { render: 'There they are!', type: "success", isLoading: false, autoClose: 2000 })
       });
-    } 
+    }
   };
 };
