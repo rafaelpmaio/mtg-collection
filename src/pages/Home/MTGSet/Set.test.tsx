@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Set from "./Set";
+import MTGSet from ".";
 import { RecoilRoot } from "recoil";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
@@ -60,7 +60,7 @@ describe("given an set list item", () => {
     const user = userEvent.setup();
     render(
       <RecoilRoot>
-        <Set set={set} key={set.id} />
+        <MTGSet set={set} key={set.id} />
       </RecoilRoot>,
       { wrapper: BrowserRouter }
     );
@@ -76,7 +76,7 @@ describe("given an set list item", () => {
     const user = userEvent.setup();
     render(
       <RecoilRoot>
-        <Set set={set} key={set.id}/>
+        <MTGSet set={set} key={set.id}/>
       </RecoilRoot>,
       { wrapper: BrowserRouter }
     );

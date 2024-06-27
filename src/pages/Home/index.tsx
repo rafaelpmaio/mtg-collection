@@ -1,9 +1,8 @@
-import styles from "./_home.module.scss";
 import { useEffect } from "react";
 import data from 'assets/data.json'
 import useSetSetsList from "state/hooks/stateHooks/setsListState/useSetCardsSetsList";
 import { useGetFilteredSetsList } from "state/hooks/stateHooks/filteredSetsListState/useGetFilteredSetsList";
-import Set from "./Set/Set"
+import MTGSet from "./MTGSet"
 import { Box } from "@mui/material";
 
 
@@ -25,7 +24,7 @@ const Home = () => {
       }}>
       {
         setsList.map((set) => (
-          <Set set={set} key={set.id} />
+          <MTGSet set={set} key={set.id} />
         ))
       }
     </Box >

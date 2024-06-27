@@ -2,7 +2,6 @@ import ISet from "interfaces/ISet";
 import { Link } from "react-router-dom";
 import { useToggleFromFavorite } from "state/hooks/customHooks/useToggleFromFavorite";
 import { useSetSelectedSet } from "state/hooks/stateHooks/selectedSetState/useSetSelectedSet";
-import styles from "./_set.module.scss";
 import "keyrune";
 import { Card, CardActions, CardContent, Stack, Typography, CardMedia, FormControlLabel, Checkbox, Skeleton } from "@mui/material";
 import StarIcon from '@mui/icons-material/Star';
@@ -15,7 +14,7 @@ interface SetProps {
   key: string
 }
 
-const Set = ({ set, key }: SetProps) => {
+const MTGSet = ({ set, key }: SetProps) => {
   const toggleSetFromCollectList = useToggleFromFavorite();
   const setSelectedSet = useSetSelectedSet();
 
@@ -84,4 +83,4 @@ const Set = ({ set, key }: SetProps) => {
   );
 };
 
-export default Set;
+export default MTGSet;

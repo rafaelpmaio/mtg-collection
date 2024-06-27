@@ -8,7 +8,6 @@ import { IScryfallData } from "interfaces/IScryfallData";
 import { toast } from "react-toastify";
 
 export const useBuildScryfallData = () => {
-  console.log("entrou no build scryfall data")
   const setScryfallData = useSetScryfallData();
   const saveSetInMemory = useSaveSetInMemory();
   const setsInMemory = useGetSetsSavedInMemory();
@@ -19,34 +18,32 @@ export const useBuildScryfallData = () => {
       toast.error("no Set found!");
       return;
     }
-    console.log("teste", cardsList)
 
-    if (!setsInMemory.includes(selectedSet.id)) {
-      const loading = toast.loading('give me a minute to load the cards!')
-      const scryfallCardArray: Promise<IScryfallData>[] = cardsList.map(
-        (card) => {
-          let scryfallCard = httpScryfall
-            .get(card.scryfallId)
-            .then((scryfallResponse) => {
-              const scryfallData = scryfallResponse.data;
-              console.log("scryfallData", scryfallData)
-              let scryfallCard: IScryfallData = {
-                id: card.id,
-                prices: scryfallData.prices,
-                images: scryfallData.image_uris,
-              };
-              return scryfallCard;
-            });
-          return scryfallCard;
-        }
-      );
+    //não está funcionando como deveria, rever a lógica
+    // if (!setsInMemory.includes(selectedSet.id)) {
+    const loading = toast.loading('give me a minute to load the cards!')
+    const scryfallCardArray: Promise<IScryfallData>[] = cardsList.map(
+      (card) => {
+        let scryfallCard = httpScryfall
+          .get(card.scryfallId)
+          .then((scryfallResponse) => {
+            const scryfallData = scryfallResponse.data;
+            let scryfallCard: IScryfallData = {
+              id: card.id,
+              prices: scryfallData.prices,
+              images: scryfallData.image_uris,
+            };
+            return scryfallCard;
+          });
+        return scryfallCard;
+      }
+    );
 
-      Promise.all(scryfallCardArray).then((scryfallCardArray) => {
-        console.log("arra", scryfallCardArray)
-        setScryfallData(scryfallCardArray);
-        saveSetInMemory(selectedSet);
-        toast.update(loading, { render: 'There they are!', type: "success", isLoading: false, autoClose: 2000 })
-      });
-    }
+    Promise.all(scryfallCardArray).then((scryfallCardArray) => {
+      setScryfallData(scryfallCardArray);
+      saveSetInMemory(selectedSet);
+      toast.update(loading, { render: 'There they are!', type: "success", isLoading: false, autoClose: 2000 })
+    });
+    // }
   };
 };

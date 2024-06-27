@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { RecoilRoot } from "recoil";
-import Card from "./Card";
+import MTGCard from ".";
 
 const card = {
   id: "1",
@@ -11,7 +11,7 @@ const card = {
 
 describe("given a card", () => {
   test("its infos are displayed", () => {
-    render(<Card card={card} />, { wrapper: RecoilRoot });
+    render(<MTGCard card={card} />, { wrapper: RecoilRoot });
 
     const name = screen.getByText(card.name);
     const collectCheckbox = screen.getByRole("checkbox");

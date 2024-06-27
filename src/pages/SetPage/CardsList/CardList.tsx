@@ -1,5 +1,5 @@
-import Card from "./Card/Card";
-import styles from "./_cardList.module.scss";
+import { Box } from "@mui/material";
+import MTGCard from "./MTGCard";
 import ICard from "interfaces/ICard";
 
 interface cardsListProps {
@@ -8,11 +8,18 @@ interface cardsListProps {
 
 const CardsList = ({ cardsList }: cardsListProps) => {
   return (
-    <ul className={styles.list}>
+    <Box
+      component="section"
+      sx={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, max(230px, 100%/5 - 0.5rem)), 1fr))", //0.5 refers to column gap
+        gap: "2rem .5rem",
+        justifyItems: "center"
+      }}>
       {cardsList.map((card) => (
-        <Card key={card.id} card={card} />
+        <MTGCard key={card.id} card={card} />
       ))}
-    </ul>
+    </Box>
   );
 };
 
