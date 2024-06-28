@@ -1,36 +1,22 @@
 import { useEffect, useState } from "react";
 import { TextField, MenuItem } from "@mui/material";
-import { useLocation } from "react-router-dom";
-import optionsArr from "assets/optionsArr.json"
 
 interface DropdownMenuProps {
-  handleFilter: (option: string) => void
+  handleFilter: (option: string) => void,
+  options: string[],
+  defaultValue?: string
 }
 
-const DropdownMenu = ({ handleFilter }: DropdownMenuProps) => {
-  const [pathOptions, setPathOptions] = useState<{ pathname: string, options: string[] } | null>(null)
+const DropdownMenu = ({ handleFilter, options }: DropdownMenuProps) => {
   const [option, setOption] = useState<string>("")
-
-  const pathname = useLocation().pathname.split("/")[1];
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOption(event.target.value as string)
   }
 
-  console.log("renderizou o DDMenu novamente")
-
   useEffect(() => {
-    console.log("entrou aqui no useEffect do DDMenu")
-    const newOptions = optionsArr.find(option => option.pathname === pathname);
-    if (newOptions) {
-      setPathOptions(newOptions);
-      if (newOptions.options[0] !== option) setOption(newOptions.options[0])
-    }
-  }, [pathname]);
-
-  useEffect(() => {
-    console.log("entrou aqui no useEffect 2 do DDMenu")
-    if (option !== "") handleFilter(option)
+    !option && setOption(options[0])
+    handleFilter(option)
   }, [option])
 
   return (
@@ -40,18 +26,18 @@ const DropdownMenu = ({ handleFilter }: DropdownMenuProps) => {
       onChange={handleChange}
       value={option}
       sx={{
-        width: 200
+        width: 200,
+        marginBottom: 2
       }}
     >
-      {pathOptions
-        && pathOptions.options.map((opt: string) => (
-          <MenuItem
-            value={opt}
-            key={opt}
-          >
-            {opt}
-          </MenuItem>
-        ))
+      {options.map((opt: string) => (
+        <MenuItem
+          value={opt}
+          key={opt}
+        >
+          {opt}
+        </MenuItem>
+      ))
       }
     </TextField>
 

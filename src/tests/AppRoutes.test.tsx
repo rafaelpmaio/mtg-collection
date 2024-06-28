@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import AppRoutes from "./AppRoutes";
+import AppRoutes from "../components/AppRoutes/AppRoutes";
 import { BrowserRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import { useGetFilteredSetsList } from "state/hooks/stateHooks/filteredSetsListState/useGetFilteredSetsList";

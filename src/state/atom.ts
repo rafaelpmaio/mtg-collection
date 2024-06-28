@@ -18,18 +18,22 @@ export const selectedSetState = atom<ISet | null>({
   default: null,
 });
 
-export const filteredCardsListState = atom<ICard[] >({
+export const filteredCardsListState = atom<ICard[]>({
   key: "filteredCardsListState",
   default: [],
 });
 
-export const scryfallCardsDataState = atom<IScryfallData[]>({
-  key:'scryfallCardsDataState',
-  default:[]
+export const scryfallCardsListDataState = atom<IScryfallData[]>({
+  key: 'scryfallCardsDataListState',
+  default: []
+})
+export const scryfallCardDataState = atom<IScryfallData | null>({
+  key: 'scryfallCardDataState',
+  default: null
 })
 
 export const saveSetInMemoryState = atom<string[]>({
-  key:'saveSetInMemoryState',
-  default:[]
+  key: 'saveSetInMemoryState',
+  default: []
 })
 

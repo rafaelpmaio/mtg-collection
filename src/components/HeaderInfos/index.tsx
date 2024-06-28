@@ -1,7 +1,7 @@
 import { Stack, Typography } from "@mui/material"
 import ISet from "interfaces/ISet"
 import { useLocation } from "react-router-dom";
-import { useGetScryfallData } from "state/hooks/stateHooks/scryfallDataState/useGetScryfallData";
+import { useGetScryfallCardsListData } from "state/hooks/stateHooks/scryfallCardsListDataState/useGetScryfallCardsListData";
 import { calculateTotalSetCost } from "utils/calculateTotalSetCost";
 
 interface HeaderInfosProps {
@@ -10,7 +10,7 @@ interface HeaderInfosProps {
 
 const HeaderInfos = ({ set }: HeaderInfosProps) => {
     const pathname = useLocation().pathname;
-    const scryfallData = useGetScryfallData();
+    const scryfallData = useGetScryfallCardsListData();
 
     return (
         <Stack spacing={1}>

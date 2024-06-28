@@ -1,4 +1,4 @@
-import SetPage from "pages/SetPage/SetPage";
+import SetPage from "pages/SetPage";
 import DefaultPage from "pages/DefaultPage";
 import Home from "pages/Home";
 import { Route, Routes } from "react-router-dom";

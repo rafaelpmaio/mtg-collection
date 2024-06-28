@@ -12,12 +12,13 @@ interface CardProps {
 const MTGCard = ({ card }: CardProps) => {
 
   const toggleCardCollectStatus = useToggleCardCollectStatus();
-
+  
   return (
     <Card
       elevation={4}
       sx={{
         height: "420px",
+        width:"210px",
         filter: !card.isCollected ? "grayscale(1)" : "",
         bgcolor: !card.isCollected ? "rgb(230, 230, 230)" : ""
       }}

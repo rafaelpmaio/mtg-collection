@@ -1,11 +1,11 @@
 import ICard from "interfaces/ICard";
 import { IScryfallData } from "interfaces/IScryfallData";
 import { useEffect, useState } from "react";
-import { useGetScryfallData } from "../stateHooks/scryfallDataState/useGetScryfallData";
+import { useGetScryfallCardsListData } from "../stateHooks/scryfallCardsListDataState/useGetScryfallCardsListData";
 
 export const useGetScryfallCard = (card: ICard) => {
   const [scryfallCard, setScryfallCard] = useState<IScryfallData>();
-  const scryfallData = useGetScryfallData();
+  const scryfallData = useGetScryfallCardsListData();
   const foundCard = scryfallData.find((data) => data.id === card.id);
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import CheckboxC from ".";
+import CheckboxC from "../components/CheckboxC";
 
 const mockToggleCheckedStatusFunction = jest.fn();
 

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import MTGSet from ".";
+import MTGSet from "../pages/Home/MTGSet";
 import { RecoilRoot } from "recoil";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";

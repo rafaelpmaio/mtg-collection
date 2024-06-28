@@ -16,7 +16,7 @@ const MTGCardInfos = ({ card }: { card: ICard }) => {
                 {
                     imageSmall
                         ? <CardMedia component="img" image={imageSmall} aria-label={card.name} height={300} />
-                        : <Skeleton variant="rectangular" height={300} width={210} animation="wave"/>
+                        : <Skeleton variant="rectangular" height={300} width="100%" animation="wave" />
                 }
             </Link>
             <CardContent sx={{ padding: "5px" }}>

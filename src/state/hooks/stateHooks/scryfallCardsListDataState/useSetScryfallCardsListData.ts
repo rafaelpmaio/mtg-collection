@@ -1,9 +1,9 @@
 import { IScryfallData } from "interfaces/IScryfallData"
 import { useSetRecoilState } from "recoil"
-import { scryfallCardsDataState } from "state/atom"
+import { scryfallCardsListDataState } from "state/atom"
 
-export const useSetScryfallData = () => {
-    const setData = useSetRecoilState(scryfallCardsDataState)
+export const useSetScryfallCardsListData = () => {
+    const setData = useSetRecoilState(scryfallCardsListDataState)
 
     return (cardsListData: IScryfallData[]) => {
         setData(data => [...data, ...cardsListData])

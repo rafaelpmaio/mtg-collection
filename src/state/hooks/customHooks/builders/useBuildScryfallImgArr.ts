@@ -1,4 +1,4 @@
-import { useSetScryfallData } from "../../stateHooks/scryfallDataState/useSetScryfallData";
+import { useSetScryfallCardsListData } from "../../stateHooks/scryfallCardsListDataState/useSetScryfallCardsListData";
 import { useGetSetsSavedInMemory } from "../../stateHooks/saveSetInMemoryState/useGetSetsSavedInMemory";
 import { useGetSelectedSet } from "../../stateHooks/selectedSetState/useGetSelectedSet";
 import ICard from "interfaces/ICard";
@@ -7,8 +7,8 @@ import { httpScryfall } from "httpApi";
 import { IScryfallData } from "interfaces/IScryfallData";
 import { toast } from "react-toastify";
 
-export const useBuildScryfallData = () => {
-  const setScryfallData = useSetScryfallData();
+export const useBuildScryfallImgArr = () => {
+  const setScryfallData = useSetScryfallCardsListData();
   const saveSetInMemory = useSaveSetInMemory();
   const setsInMemory = useGetSetsSavedInMemory();
   const selectedSet = useGetSelectedSet();

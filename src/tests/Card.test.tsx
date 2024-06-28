@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { RecoilRoot } from "recoil";
-import MTGCard from ".";
+import MTGCard from "../pages/SetPage/MTGCard";
 
 const card = {
   id: "1",
