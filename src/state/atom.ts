@@ -27,10 +27,6 @@ export const scryfallCardsListDataState = atom<IScryfallData[]>({
   key: 'scryfallCardsDataListState',
   default: []
 })
-export const scryfallCardDataState = atom<IScryfallData | null>({
-  key: 'scryfallCardDataState',
-  default: null
-})
 
 export const saveSetInMemoryState = atom<string[]>({
   key: 'saveSetInMemoryState',

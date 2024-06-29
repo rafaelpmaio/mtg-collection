@@ -14,7 +14,7 @@ const DefaultPage = () => {
       sx={{ padding: "10px" }}
     >
       <Box
-        height={150}
+        height={100}
         display="flex"
         justifyContent="center"
         alignItems="center"

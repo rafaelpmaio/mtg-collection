@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import data from 'assets/data.json'
 import useSetSetsList from "state/hooks/stateHooks/setsListState/useSetCardsSetsList";
 import { useGetFilteredSetsList } from "state/hooks/stateHooks/filteredSetsListState/useGetFilteredSetsList";
 import MTGSet from "./MTGSet"
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import DropdownMenu from "components/DropdownMenu";
 import { useHandleSelectorFilter } from "state/hooks/customHooks/useHandleSelectorFilter";
 
@@ -13,10 +13,15 @@ const options = [
   "Completed"
 ]
 
-const Home = () => {  
+const Home = () => {
   const buildSets = useSetSetsList();
   const setsList = useGetFilteredSetsList();
   const handleFilter = useHandleSelectorFilter();
+
+  const [showMoreSets, setShowMoreSets] = useState(20)
+  const loadMoreSets = () => {
+    setShowMoreSets(prev => prev + 20);
+  }
 
 
   useEffect(() => {
@@ -27,20 +32,22 @@ const Home = () => {
     <Box
       component="section"
       textAlign="center"
+
     >
-      <DropdownMenu handleFilter={handleFilter} options={options}/>
+      <DropdownMenu handleFilter={handleFilter} options={options} />
       <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, max(260px, 100%/5 - 0.5rem)), 1fr))",
-          gap: "0.5rem",
-        }}>
+        marginBottom={2}
+        display="grid"
+        gridTemplateColumns="repeat(auto-fit, minmax(min(100%, max(260px, 100%/5 - 0.5rem)), 1fr))"
+        gap="0.5rem"
+      >
         {
-          setsList.map((set) => (
+          setsList.slice(0, showMoreSets).map((set) => (
             <MTGSet set={set} key={set.id} />
           ))
         }
       </Box>
+      <Button variant="contained" onClick={loadMoreSets}>Show More</Button>
     </Box >
   );
 };

@@ -34,6 +34,9 @@ const MTGSet = ({ set, key }: SetProps) => {
       elevation={4}
       onClick={() => setSelectedSet(set)}
       key={key}
+      sx={{
+        maxHeighth:"80px"
+      }}
     >
       <Stack direction="row">
         {
@@ -57,29 +60,6 @@ const MTGSet = ({ set, key }: SetProps) => {
       </Stack>
     </Card >
 
-
-
-    // <li
-    //   className={`${styles.container} ${
-    //     !set.collect ? styles.uncollecting : ""
-    //   } ${set.isCompleted ? styles.completed : ""}`}
-    //   onClick={() => setSelectedSet(set)}
-    // >
-    //   <Link to={`/collection/${set.name}`}>
-    //     <i
-    //       className={`ss ss-${set.image} ss-3x  ${
-    //         set.isCompleted ? "ss-rare" : "ss-common"
-    //       }`}
-    //     ></i>
-    //     <p>{set.name}</p>
-    //     <p>{`${percentage(set.collectedCardsTotal, set.totalSetSize)}%`}</p>
-    //   </Link>
-    //   <CheckboxC
-    //     checkToggleFunction={(checkStatus) =>
-    //       toggleSetFromCollectList(set, checkStatus)
-    //     }
-    //   />
-    // </li>
   );
 };
 
