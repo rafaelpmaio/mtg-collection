@@ -1,5 +1,4 @@
 import { useGetFilteredCardsList } from "state/hooks/stateHooks/filteredCardsListState/useGetFilteredCardsList";
-import { useBuildScryfallImgArr } from "state/hooks/customHooks/builders/useBuildScryfallImgArr";
 import { useEffect } from "react";
 import { useUpdateCompletedSetStatus } from "state/hooks/customHooks/useUpdateCompletedSetStatus";
 import { useGetSelectedSet } from "state/hooks/stateHooks/selectedSetState/useGetSelectedSet";
@@ -17,14 +16,12 @@ const options = [
 const SetPage = () => {
   const set = useGetSelectedSet();
   const cardsList = useGetFilteredCardsList();
-  const buildScryfallData = useBuildScryfallImgArr();
   const updateCompletedStatus = useUpdateCompletedSetStatus();
   const handleFilter = useHandleSelectorFilter();
 
 
   useEffect(() => {
     updateCompletedStatus(set ? set : undefined);
-    buildScryfallData(cardsList);
   }, [cardsList]);
 
   return (

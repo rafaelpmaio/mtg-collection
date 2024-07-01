@@ -15,7 +15,7 @@ interface SetProps {
 }
 
 const MTGSet = ({ set, key }: SetProps) => {
-  const toggleSetFromCollectList = useToggleFromFavorite();
+  const toggleSetFromFavoriteList = useToggleFromFavorite();
   const setSelectedSet = useSetSelectedSet();
 
   const [favorite, setFavorite] = useState(false)
@@ -25,8 +25,7 @@ const MTGSet = ({ set, key }: SetProps) => {
   }
 
   useEffect(() => {
-    toggleSetFromCollectList(set, favorite)
-
+    toggleSetFromFavoriteList(set, favorite)
   }, [favorite])
 
   return (
@@ -35,7 +34,7 @@ const MTGSet = ({ set, key }: SetProps) => {
       onClick={() => setSelectedSet(set)}
       key={key}
       sx={{
-        maxHeighth:"80px"
+        maxHeighth:"80px",
       }}
     >
       <Stack direction="row">

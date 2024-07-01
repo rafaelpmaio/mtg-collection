@@ -7,16 +7,14 @@ import { httpScryfall } from "httpApi";
 import { IScryfallData } from "interfaces/IScryfallData";
 import { useGetScryfallCardsListData } from "state/hooks/stateHooks/scryfallCardsListDataState/useGetScryfallCardsListData";
 
-export const useGetScryfallImg = () => {
-  const setScryfallData = useSetScryfallCardsListData();
+export const useRequestScryfallData = () => {
   const scryfallCardsList = useGetScryfallCardsListData();
   // const saveSetInMemory = useSaveSetInMemory();
   // const setsInMemory = useGetSetsSavedInMemory();
   // const selectedSet = useGetSelectedSet();
 
-  return (card: ICard) => {
+  return (card: ICard, setScryfallCard: (card: IScryfallData) => void) => {
 
-    //não está funcionando como deveria, rever a lógica
     // if (!setsInMemory.includes(selectedSet.id)) {
     // const scryfallCardData: Promise<IScryfallData> = 
     httpScryfall
@@ -28,9 +26,9 @@ export const useGetScryfallImg = () => {
           prices: data.prices,
           images: data.image_uris,
         };
-        console.log("scryfallCard", scryfallCard)
-        setScryfallData([...scryfallCardsList, scryfallCard]);
-      });
+        console.log("nova requisição feita", scryfallCard)
+        setScryfallCard(scryfallCard);
+      }).catch(error => console.error("Failed to request Scryfall card data", error));
 
     // scryfallCardData.then((data) => {
     // setScryfallData(scryfallCardArray);

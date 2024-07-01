@@ -1,25 +1,30 @@
-import { CardContent, CardMedia, Skeleton, Typography } from "@mui/material";
+import { Box, CardContent, CardMedia, Skeleton, Typography } from "@mui/material";
 import ICard from "interfaces/ICard";
 import { IScryfallData } from "interfaces/IScryfallData";
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
-import { useFindScryfallCard } from "state/hooks/customHooks/useFindScryfallCard";
+import { useRequestScryfallData } from "state/hooks/customHooks/builders/useRequestScryfallData";
 
 const MTGCardInfos = ({ card }: { card: ICard }) => {
 
-    const scryfallCard: IScryfallData | undefined = useFindScryfallCard(card);
-
-    console.log("scryfallCard", scryfallCard)
-
-    //imageSmall não está carregando no "Media Inserts"
-    const imageSmall =
-        scryfallCard &&
-            scryfallCard?.images.small
-            ? scryfallCard?.images.small
-            : scryfallCard?.images.normal
+    const [scryfallCard, setScryfallCard] = useState<IScryfallData>();
+    const requestData = useRequestScryfallData();
+    const imageSmall = scryfallCard?.images && scryfallCard?.images.small
     const priceUsd = scryfallCard?.prices.usd;
 
+    const { ref, inView } = useInView({
+        threshold: 0.1
+    })
+
+    useEffect(() => {
+        if (inView) requestData(card, setScryfallCard);
+    }, [inView])
+
+
+
     return (
-        <>
+        <Box ref={ref}>
             <Link to={card.tcgLink ? card.tcgLink : ""}>
                 {
                     imageSmall
@@ -35,7 +40,7 @@ const MTGCardInfos = ({ card }: { card: ICard }) => {
                     <b>{priceUsd ? priceUsd : "0"}</b>
                 </Typography>
             </CardContent>
-        </>
+        </Box>
     )
 }
 
