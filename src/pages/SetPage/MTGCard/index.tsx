@@ -1,8 +1,9 @@
 import ICard from "interfaces/ICard";
-import CheckboxC from "components/CheckboxC";
+// import CheckboxC from "components/CheckboxC";
 import { useToggleCardCollectStatus } from "state/hooks/customHooks/useToggleCardCollectStatus";
-import { Card, CardActions, FormControlLabel } from "@mui/material";
+import { Card, CardActions, Checkbox, FormControlLabel } from "@mui/material";
 import MTGCardInfos from "./MTGCardInfos";
+import { useState } from "react";
 
 interface CardProps {
   card: ICard;
@@ -10,7 +11,10 @@ interface CardProps {
 
 const MTGCard = ({ card }: CardProps) => {
 
+  const [collected, setCollected] = useState(card.isCollected)
+
   const toggleCardCollectStatus = useToggleCardCollectStatus();
+  console.log("carta regarregada", card)
 
   return (
     <Card
@@ -18,8 +22,8 @@ const MTGCard = ({ card }: CardProps) => {
       sx={{
         height: "420px",
         width: "210px",
-        filter: !card.isCollected ? "grayscale(1)" : "",
-        bgcolor: !card.isCollected ? "rgb(230, 230, 230)" : ""
+        filter: !collected ? "grayscale(1)" : "",
+        bgcolor: !collected ? "rgb(230, 230, 230)" : ""
       }}
     >
       <MTGCardInfos card={card} />
@@ -27,9 +31,14 @@ const MTGCard = ({ card }: CardProps) => {
         <FormControlLabel
           label
           control={
-            <CheckboxC checkToggleFunction={(checkStatus) => toggleCardCollectStatus(card, checkStatus)} >
-              Collected
-            </CheckboxC>
+            <Checkbox
+              checked={collected}
+              onChange={(e) => {
+                let checked = e.target.checked
+                toggleCardCollectStatus(card, checked);
+                setCollected(checked)
+              }}
+            />
           }
         />
       </CardActions>

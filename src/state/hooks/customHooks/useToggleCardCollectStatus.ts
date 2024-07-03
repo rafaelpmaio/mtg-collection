@@ -1,14 +1,16 @@
 import ICard from "interfaces/ICard";
 import useSetCardsSetsList from "../stateHooks/setsListState/useSetCardsSetsList";
 import { useGetSetsList } from "../stateHooks/setsListState/useGetSetsList";
-import { toast } from "react-toastify";
 import { useGetSelectedSet } from "../stateHooks/selectedSetState/useGetSelectedSet";
+import { useSetFilteredCardsList } from "../stateHooks/filteredCardsListState/useSetFilteredCardsList";
+import ISet from "interfaces/ISet";
 
 export const useToggleCardCollectStatus = () => {
+  const set = useGetSelectedSet();
   const prevList = useGetSetsList();
   const updateSetsList = useSetCardsSetsList();
-  // const setOfTheCard = useGetUpdatedSet();
-  const setOfTheCard = useGetSelectedSet();
+  const updateFilteredList = useSetFilteredCardsList();
+
   const calculateCollectedTotal = (cardsList: ICard[]) => {
     const collectedTotal = cardsList.reduce(
       (accumulator, card) => accumulator + Number(card.isCollected),
@@ -17,35 +19,41 @@ export const useToggleCardCollectStatus = () => {
     return collectedTotal;
   };
 
-  return (selectedCard: ICard, checkStatus: boolean = false) => {
-    if (!setOfTheCard) {
-      toast.error("we could not find the Set of the selected card");
-      return;
+  return (card: ICard, checked: boolean = false) => {
+
+    if (!set) throw Error("set not found")
+
+      console.log("cardslist", checked)
+
+    const updatedCard: ICard = {
+      ...card,
+      isCollected: checked 
     }
-    const updatedCardsList = setOfTheCard.cards.map((card) => {
-      if (card.id === selectedCard.id) {
-        return {
-          ...card,
-          isCollected: checkStatus,
+
+    const updatedCardsList: ICard[] = set.cards.map(card => 
+      card.id === updatedCard.id ? updatedCard : card
+    )
+
+    //está usando duas referencias de set diferentes, setsList e filteredSetsList, por isso quando altera uma carta ele pega o id do setsList que ainda está como não coletado e a carta volta a ficar como iscollected false. Para resolver isso talvez utilizar o useState do checked e filtrar através dele. --> ou achar alguma forma de unificar as lsitas
+    const setsList: ISet[] = prevList.map((set) => {
+      if (set.id === set.id) {
+        set = {
+          ...set,
+          // collectedCardsTotal: collectedTotal,
+          cards: [
+            ...set.cards,
+            updatedCard
+          ],
         };
-      }
-      return card;
-    });
-
-    const collectedTotal = calculateCollectedTotal(updatedCardsList);
-
-    updateSetsList(
-      prevList.map((set) => {
-        if (set.id === setOfTheCard.id) {
-          set = {
-            ...set,
-            collectedCardsTotal: collectedTotal,
-            cards: updatedCardsList,
-          };
-          return set;
-        }
         return set;
-      })
-    );
+      }
+      return set;
+    })
+
+    // const collectedTotal = calculateCollectedTotal(updatedCardsList);
+
+    updateSetsList(setsList);
+    updateFilteredList(updatedCardsList)
+
   };
 };

@@ -37,7 +37,6 @@ export const useHandleSelectorFilter = () => {
     const filteredSetsList = filterOptions_sets[option] ? filterOptions_sets[option]() : [];
     setFilteredSetsList(filteredSetsList);
 
-    //cardsList e filteredCardsList estão retornando o array correto, ver se o array com com a imagem do scryfall está undefined
     const filteredCardsList = filterOptions_cards[option] ? filterOptions_cards[option]() : [];
     setFilteredCardsList(filteredCardsList)
 

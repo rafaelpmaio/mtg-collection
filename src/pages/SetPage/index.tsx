@@ -14,15 +14,15 @@ const options = [
 ]
 
 const SetPage = () => {
-  const set = useGetSelectedSet();
+  // const set = useGetSelectedSet();
   const cardsList = useGetFilteredCardsList();
-  const updateCompletedStatus = useUpdateCompletedSetStatus();
+  // const updateCompletedStatus = useUpdateCompletedSetStatus();
   const handleFilter = useHandleSelectorFilter();
 
-
-  useEffect(() => {
-    updateCompletedStatus(set ? set : undefined);
-  }, [cardsList]);
+console.log("cardslist", cardsList)
+  // useEffect(() => {
+  //   updateCompletedStatus(set ? set : undefined);
+  // }, [cardsList]);
 
   return (
     <Box
