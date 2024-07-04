@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { useToggleFromFavorite } from "state/hooks/customHooks/useToggleFromFavorite";
 import { useSetSelectedSet } from "state/hooks/stateHooks/selectedSetState/useSetSelectedSet";
 import "keyrune";
-import { Card, CardActions, CardContent, Stack, Typography, CardMedia, FormControlLabel, Checkbox, Skeleton } from "@mui/material";
+import { Card, CardActions, Stack, FormControlLabel, Checkbox, Skeleton, Button } from "@mui/material";
 import StarIcon from '@mui/icons-material/Star';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import React, { useEffect, useState } from "react";
 import SetInfos from "./SetInfos";
+import { useSetCardsList } from "state/hooks/stateHooks/cardsListState/useSetCardsList";
 
 interface SetProps {
   set: ISet;
@@ -15,10 +16,11 @@ interface SetProps {
 }
 
 const MTGSet = ({ set, key }: SetProps) => {
+  const [favorite, setFavorite] = useState(false);
+
   const toggleSetFromFavoriteList = useToggleFromFavorite();
   const setSelectedSet = useSetSelectedSet();
-
-  const [favorite, setFavorite] = useState(false)
+  const setCardsList = useSetCardsList();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFavorite(event.target.checked)
@@ -34,14 +36,14 @@ const MTGSet = ({ set, key }: SetProps) => {
       onClick={() => setSelectedSet(set)}
       key={key}
       sx={{
-        maxHeighth:"80px",
+        maxHeighth: "80px",
       }}
     >
       <Stack direction="row">
         {
           set
             ? <>
-              <Link to={`/collection/${set.name}`} style={{ width: "100%" }}>
+              <Link to={`/collection/${set.name}`} style={{ width: "100%" }} onClick={() =>  setCardsList(set.cards)}>
                 <SetInfos set={set} />
               </Link>
               <CardActions>
@@ -54,7 +56,7 @@ const MTGSet = ({ set, key }: SetProps) => {
                 />} />
               </CardActions>
             </>
-            : <Skeleton variant="rectangular" height={70} width="100%" animation="wave"/>
+            : <Skeleton variant="rectangular" height={70} width="100%" animation="wave" />
         }
       </Stack>
     </Card >

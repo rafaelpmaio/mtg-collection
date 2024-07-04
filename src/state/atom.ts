@@ -18,6 +18,11 @@ export const selectedSetState = atom<ISet | null>({
   default: null,
 });
 
+
+export const cardsListState = atom<ICard[]>({
+  key: "cardsListState",
+  default: [],
+});
 export const filteredCardsListState = atom<ICard[]>({
   key: "filteredCardsListState",
   default: [],

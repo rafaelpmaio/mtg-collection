@@ -17,7 +17,7 @@ export default function SetInfos({ set }: SetInfosProps) {
     )
 
     return (
-        <Stack direction="row" >
+        <Stack direction="row">
             <CardMedia
                 component="i"
                 className={`ss ss-${set.image} ss-2x  ${set.isCompleted ? "ss-rare" : "ss-common"}`}

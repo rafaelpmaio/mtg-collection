@@ -32,7 +32,12 @@ const MTGCardInfos = ({ card }: { card: ICard }) => {
                         : <Skeleton variant="rectangular" height={300} width="100%" animation="wave" />
                 }
             </Link>
-            <CardContent sx={{ padding: "5px" }}>
+            <CardContent sx={{
+                padding: "5px",
+                '&:last-child': {
+                    paddingBottom: "15px",
+                },
+            }}>
                 <Typography variant="body2">nº: {card.number}</Typography>
                 <Typography variant="body2" fontWeight="bold"> {card.name} </Typography>
                 <Typography variant="body2" >

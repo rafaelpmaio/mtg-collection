@@ -1,4 +1,4 @@
-import { useGetSelectedSet } from "../stateHooks/selectedSetState/useGetSelectedSet";
+import { useGetCardsList } from "../stateHooks/cardsListState/useGetCardsList";
 import { useSetFilteredCardsList } from "../stateHooks/filteredCardsListState/useSetFilteredCardsList";
 import { useSetFilteredSetsList } from "../stateHooks/filteredSetsListState/useSetFilteredSetsList";
 import { useGetSetsList } from "../stateHooks/setsListState/useGetSetsList";
@@ -12,12 +12,13 @@ type CardsFilterFunction = () => ICard[];
 
 export const useHandleSelectorFilter = () => {
   const setsList = useGetSetsList();
-  const selectedSet = useGetSelectedSet();
+  const cardsList = useGetCardsList();
   const setFilteredSetsList = useSetFilteredSetsList();
   const setFilteredCardsList = useSetFilteredCardsList();
 
-  const cardsList = selectedSet?.cards || [];
   console.log("entrou no useHandleSelectorFilter")
+
+  console.log("cardslist do handle", cardsList)
 
   const filterOptions_sets: Record<string, SetsFilterFunction> = {
     All: () => setsList,

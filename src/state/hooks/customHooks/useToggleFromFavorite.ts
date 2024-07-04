@@ -1,10 +1,10 @@
 import ISet from "interfaces/ISet";
-import useSetCardsSetsList from "../stateHooks/setsListState/useSetCardsSetsList";
+import useSetSetsList from "../stateHooks/setsListState/useSetSetsList";
 import { useGetSetsList } from "../stateHooks/setsListState/useGetSetsList";
 import { useCallback } from "react";
 
 export const useToggleFromFavorite = () => {
-  const setCardsSetList = useSetCardsSetsList();
+  const setCardsSetList = useSetSetsList();
   const setsList = useGetSetsList();
 
   return useCallback((selectedSet: ISet, checkStatus: boolean = false) => {

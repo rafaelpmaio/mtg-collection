@@ -1,5 +1,4 @@
 import ICard from "interfaces/ICard";
-// import CheckboxC from "components/CheckboxC";
 import { useToggleCardCollectStatus } from "state/hooks/customHooks/useToggleCardCollectStatus";
 import { Card, CardActions, Checkbox, FormControlLabel } from "@mui/material";
 import MTGCardInfos from "./MTGCardInfos";
@@ -27,12 +26,20 @@ const MTGCard = ({ card }: CardProps) => {
       }}
     >
       <MTGCardInfos card={card} />
-      <CardActions sx={{ display: "flex", justifyContent: "center" }}>
+      <CardActions sx={{
+        padding: "0"
+      }}>
         <FormControlLabel
-          label
+          sx={{
+            margin:"auto"
+          }}
+          label="Got it!"
           control={
             <Checkbox
               checked={collected}
+              sx={{
+                padding: "0",
+              }}
               onChange={(e) => {
                 let checked = e.target.checked
                 toggleCardCollectStatus(card, checked);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import data from 'assets/data.json'
-import useSetSetsList from "state/hooks/stateHooks/setsListState/useSetCardsSetsList";
+import useSetSetsList from "state/hooks/stateHooks/setsListState/useSetSetsList";
 import { useGetFilteredSetsList } from "state/hooks/stateHooks/filteredSetsListState/useGetFilteredSetsList";
 import MTGSet from "./MTGSet"
 import { Box, Button } from "@mui/material";
@@ -32,7 +32,6 @@ const Home = () => {
     <Box
       component="section"
       textAlign="center"
-
     >
       <DropdownMenu handleFilter={handleFilter} options={options} />
       <Box
