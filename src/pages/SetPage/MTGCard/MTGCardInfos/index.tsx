@@ -21,8 +21,6 @@ const MTGCardInfos = ({ card }: { card: ICard }) => {
         if (inView) requestData(card, setScryfallCard);
     }, [inView])
 
-
-
     return (
         <Box ref={ref}>
             <Link to={card.tcgLink ? card.tcgLink : ""}>

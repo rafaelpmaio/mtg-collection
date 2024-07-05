@@ -28,7 +28,7 @@ export const useHandleSelectorFilter = () => {
 
 
   const filterOptions_cards: Record<string, CardsFilterFunction> = {
-    Number: () => cardsList,
+    All: () => cardsList,
     Collected: () => cardsList.filter((card) => card.isCollected),
     Missing: () => cardsList.filter((card) => !card.isCollected),
   };

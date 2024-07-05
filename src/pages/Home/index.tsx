@@ -18,9 +18,9 @@ const Home = () => {
   const setsList = useGetFilteredSetsList();
   const handleFilter = useHandleSelectorFilter();
 
-  const [showMoreSets, setShowMoreSets] = useState(20)
+  const [showMore, setShowMore] = useState(20)
   const loadMoreSets = () => {
-    setShowMoreSets(prev => prev + 20);
+    setShowMore(prev => prev + 20);
   }
 
 
@@ -41,7 +41,7 @@ const Home = () => {
         gap="0.5rem"
       >
         {
-          setsList.slice(0, showMoreSets).map((set) => (
+          setsList.slice(0, showMore).map((set) => (
             <MTGSet set={set} key={set.id} />
           ))
         }

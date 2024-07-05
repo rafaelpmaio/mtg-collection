@@ -2,12 +2,12 @@ import ICard from "interfaces/ICard";
 import useSetSetsList from "../stateHooks/setsListState/useSetSetsList";
 import { useGetSetsList } from "../stateHooks/setsListState/useGetSetsList";
 import ISet from "interfaces/ISet";
-import { useGetFilteredCardsList } from "../stateHooks/filteredCardsListState/useGetFilteredCardsList";
 import { useSetCardsList } from "../stateHooks/cardsListState/useSetCardsList";
+import { useGetCardsList } from "../stateHooks/cardsListState/useGetCardsList";
 
 export const useToggleCardCollectStatus = () => {
   const prevList = useGetSetsList();
-  const cardsList = useGetFilteredCardsList();
+  const cardsList = useGetCardsList();
   const updateSetsList = useSetSetsList();
   const updateCardsList = useSetCardsList();
 

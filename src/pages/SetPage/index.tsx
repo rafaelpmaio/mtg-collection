@@ -1,28 +1,42 @@
 import { useGetFilteredCardsList } from "state/hooks/stateHooks/filteredCardsListState/useGetFilteredCardsList";
-import { useEffect } from "react";
-import { useUpdateCompletedSetStatus } from "state/hooks/customHooks/useUpdateCompletedSetStatus";
-import { useGetSelectedSet } from "state/hooks/stateHooks/selectedSetState/useGetSelectedSet";
-import { Box } from "@mui/material";
+import { Box, Button, ButtonGroup, IconButton, Stack, Typography } from "@mui/material";
 import DropdownMenu from "components/DropdownMenu";
 import { useHandleSelectorFilter } from "state/hooks/customHooks/useHandleSelectorFilter";
 import MTGCard from "./MTGCard";
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import { useEffect, useState } from "react";
 
 const options = [
-  "Number",
+  "All",
   "Collected",
   "Missing"
 ]
 
 const SetPage = () => {
   // const set = useGetSelectedSet();
-  const cardsList = useGetFilteredCardsList();
   // const updateCompletedStatus = useUpdateCompletedSetStatus();
-  const handleFilter = useHandleSelectorFilter();
-
-console.log("cardslist", cardsList)
   // useEffect(() => {
   //   updateCompletedStatus(set ? set : undefined);
   // }, [cardsList]);
+
+  const cardsList = useGetFilteredCardsList();
+  const handleFilter = useHandleSelectorFilter();
+
+  const [showMore, setShowMore] = useState(0)
+  const cardsShown = 20;
+
+  const loadNextPage = () => {
+    showMore + cardsShown < cardsList.length && setShowMore(prev => prev + cardsShown);
+  }
+
+  const loadPrevPage = () => {
+    showMore > 0 && setShowMore(prev => prev - cardsShown);
+  }
+
+  useEffect(() => {
+    setShowMore(0)
+  }, [cardsList.length])
 
   return (
     <Box
@@ -37,10 +51,16 @@ console.log("cardslist", cardsList)
           gap: "2rem .5rem",
           justifyItems: "center"
         }}>
-        {cardsList.map((card) => (
-          <MTGCard key={card.id} card={card} />
-        ))}
+        {cardsList.slice(showMore, showMore + cardsShown)
+          .map((card) => (
+            <MTGCard key={card.id} card={card} />
+          ))}
       </Box>
+      <Stack direction="row" display="flex" justifyContent="center" alignItems="center">
+        <IconButton color="primary" size="large" onClick={loadPrevPage}><ArrowCircleLeftIcon /></IconButton>
+        <Typography variant="body2"> {showMore + 1} - {Math.min(showMore + cardsShown + 1, cardsList.length)}</Typography>
+        <IconButton color="primary" size="large" onClick={loadNextPage}><ArrowCircleRightIcon /></IconButton>
+      </Stack>
     </Box>
   );
 };
