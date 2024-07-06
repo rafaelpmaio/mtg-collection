@@ -47,7 +47,7 @@ const MTGSet = ({ set, key }: SetProps) => {
                 <SetInfos set={set} />
               </Link>
               <CardActions>
-                <FormControlLabel label control={<Checkbox
+                <FormControlLabel sx={{margin:"auto"}} label control={<Checkbox
                   checked={favorite}
                   icon={<StarOutlineIcon />}
                   checkedIcon={<StarIcon sx={{ color: '#FFD700' }} />}

@@ -1,20 +1,12 @@
 import { LinearProgress } from "@mui/joy";
 import { CardContent, CardMedia, Stack, Typography } from "@mui/material";
 import ISet from "interfaces/ISet";
-import { useEffect } from "react";
-import { percentage } from "utils/percentage";
 
 interface SetInfosProps {
     set: ISet
 }
 
 export default function SetInfos({ set }: SetInfosProps) {
-    var progress = 0;
-
-    useEffect(() => {
-        progress = percentage(set.collectedCardsTotal, set.totalSetSize);
-    }, [set.collectedCardsTotal, set.totalSetSize]
-    )
 
     return (
         <Stack direction="row">
@@ -29,16 +21,26 @@ export default function SetInfos({ set }: SetInfosProps) {
                 }}
             />
             <CardContent sx={{
-                width: "100%"
+                width: "100%",
             }}>
-                <Typography variant="body2" >{set.name}</Typography>
+                <Typography variant="body2" marginBottom={1} >{set.name}</Typography>
                 <LinearProgress
                     variant="solid"
-                    color={set.collect ? "success" : "neutral"}
-                    value={progress}
-                    size="lg"
+                    determinate
+                    thickness={20}
+                    color={"success"}
+                    value={Math.round((set.collectedCardsTotal / set.totalSetSize) * 100)}
+                >
+                    <Typography
+                        variant="body2"
+                        margin={0}
+                        padding={0}
+                        fontSize={14}
+                        color="white"
+                        sx={{ mixBlendMode: 'difference' }}
+                    >{Math.round((set.collectedCardsTotal / set.totalSetSize) * 100)}%</Typography>
 
-                />
+                </LinearProgress>
             </CardContent>
         </Stack>
     )

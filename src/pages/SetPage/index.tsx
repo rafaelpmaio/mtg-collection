@@ -1,5 +1,5 @@
 import { useGetFilteredCardsList } from "state/hooks/stateHooks/filteredCardsListState/useGetFilteredCardsList";
-import { Box, Button, ButtonGroup, IconButton, Stack, Typography } from "@mui/material";
+import { Box, IconButton, Stack, Typography } from "@mui/material";
 import DropdownMenu from "components/DropdownMenu";
 import { useHandleSelectorFilter } from "state/hooks/customHooks/useHandleSelectorFilter";
 import MTGCard from "./MTGCard";
@@ -14,12 +14,6 @@ const options = [
 ]
 
 const SetPage = () => {
-  // const set = useGetSelectedSet();
-  // const updateCompletedStatus = useUpdateCompletedSetStatus();
-  // useEffect(() => {
-  //   updateCompletedStatus(set ? set : undefined);
-  // }, [cardsList]);
-
   const cardsList = useGetFilteredCardsList();
   const handleFilter = useHandleSelectorFilter();
 
@@ -29,7 +23,6 @@ const SetPage = () => {
   const loadNextPage = () => {
     showMore + cardsShown < cardsList.length && setShowMore(prev => prev + cardsShown);
   }
-
   const loadPrevPage = () => {
     showMore > 0 && setShowMore(prev => prev - cardsShown);
   }

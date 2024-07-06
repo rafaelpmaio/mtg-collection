@@ -4,7 +4,7 @@ import { useGetSetsList } from "../stateHooks/setsListState/useGetSetsList";
 import { useCallback } from "react";
 
 export const useToggleFromFavorite = () => {
-  const setCardsSetList = useSetSetsList();
+  const updateSetsList = useSetSetsList();
   const setsList = useGetSetsList();
 
   return useCallback((selectedSet: ISet, checkStatus: boolean = false) => {
@@ -15,10 +15,10 @@ export const useToggleFromFavorite = () => {
       collect: checkStatus
     }
 
-    setCardsSetList([...setsList.slice(0, index), updatedSet, ...setsList.slice(index + 1)])
+    updateSetsList([...setsList.slice(0, index), updatedSet, ...setsList.slice(index + 1)])
 
 
 
-  }, [setCardsSetList, setsList]
+  }, [updateSetsList, setsList]
   )
 }

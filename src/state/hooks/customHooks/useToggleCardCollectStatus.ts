@@ -11,14 +11,6 @@ export const useToggleCardCollectStatus = () => {
   const updateSetsList = useSetSetsList();
   const updateCardsList = useSetCardsList();
 
-  const calculateCollectedTotal = (cardsList: ICard[]) => {
-    const collectedTotal = cardsList.reduce(
-      (accumulator, card) => accumulator + Number(card.isCollected),
-      0
-    );
-    return collectedTotal;
-  };
-
   return (card: ICard, checked: boolean = false) => {
 
     const updatedCard: ICard = {
@@ -30,11 +22,15 @@ export const useToggleCardCollectStatus = () => {
       card.id === updatedCard.id ? updatedCard : card
     )
 
+    const collectedTotal = updatedCardsList.reduce((accumulator, card) => accumulator + Number(card.isCollected), 0);
+    console.log("completed", collectedTotal === cardsList.length)
+
     const setsList: ISet[] = prevList.map((set) => {
       if (set.id === set.id) {
         set = {
           ...set,
-          // collectedCardsTotal: collectedTotal,
+          collectedCardsTotal: collectedTotal,
+          isCompleted: collectedTotal === cardsList.length,
           cards: [
             ...set.cards,
             updatedCard
@@ -44,8 +40,6 @@ export const useToggleCardCollectStatus = () => {
       }
       return set;
     })
-
-    // const collectedTotal = calculateCollectedTotal(updatedCardsList);
 
     updateSetsList(setsList);
     updateCardsList(updatedCardsList)
