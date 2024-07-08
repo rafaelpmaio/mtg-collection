@@ -16,7 +16,7 @@ interface SetProps {
 }
 
 const MTGSet = ({ set, key }: SetProps) => {
-  const [favorite, setFavorite] = useState(false);
+  const [favorite, setFavorite] = useState(set.collect);
 
   const toggleSetFromFavoriteList = useToggleFromFavorite();
   const setSelectedSet = useSetSelectedSet();
@@ -37,6 +37,10 @@ const MTGSet = ({ set, key }: SetProps) => {
       key={key}
       sx={{
         maxHeighth: "80px",
+        minWidth:"280px",
+        maxWidth: "325px",
+        filter: !favorite ? "grayscale(100%)" : "",
+
       }}
     >
       <Stack direction="row">

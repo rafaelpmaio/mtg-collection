@@ -37,7 +37,7 @@ const Home = () => {
       <Box
         marginBottom={2}
         display="grid"
-        gridTemplateColumns="repeat(auto-fit, minmax(min(100%, max(260px, 100%/5 - 0.5rem)), 1fr))"
+        gridTemplateColumns="repeat(auto-fill, minmax(min(100%, max(280px, 100%/5 - 0.5rem)), 1fr))"
         gap="0.5rem"
       >
         {

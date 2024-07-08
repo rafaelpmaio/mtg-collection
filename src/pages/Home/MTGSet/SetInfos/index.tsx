@@ -8,6 +8,8 @@ interface SetInfosProps {
 
 export default function SetInfos({ set }: SetInfosProps) {
 
+    // incluir fireworks quando o set for completo react-fireworks parece bem simples
+
     return (
         <Stack direction="row">
             <CardMedia
@@ -27,15 +29,15 @@ export default function SetInfos({ set }: SetInfosProps) {
                 <LinearProgress
                     variant="solid"
                     determinate
-                    thickness={20}
-                    color={"success"}
+                    thickness={17}
+                    color="primary"
                     value={Math.round((set.collectedCardsTotal / set.totalSetSize) * 100)}
                 >
                     <Typography
                         variant="body2"
                         margin={0}
                         padding={0}
-                        fontSize={14}
+                        fontSize={12}
                         color="white"
                         sx={{ mixBlendMode: 'difference' }}
                     >{Math.round((set.collectedCardsTotal / set.totalSetSize) * 100)}%</Typography>
