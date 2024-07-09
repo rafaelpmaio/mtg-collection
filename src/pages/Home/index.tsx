@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
-import data from 'assets/data.json'
-import useSetSetsList from "state/hooks/stateHooks/setsListState/useSetSetsList";
+import { useState } from "react";
 import { useGetFilteredSetsList } from "state/hooks/stateHooks/filteredSetsListState/useGetFilteredSetsList";
 import MTGSet from "./MTGSet"
 import { Box, Button } from "@mui/material";
@@ -14,7 +12,6 @@ const options = [
 ]
 
 const Home = () => {
-  const buildSets = useSetSetsList();
   const setsList = useGetFilteredSetsList();
   const handleFilter = useHandleSelectorFilter();
 
@@ -22,11 +19,6 @@ const Home = () => {
   const loadMoreSets = () => {
     setShowMore(prev => prev + 20);
   }
-
-
-  useEffect(() => {
-    buildSets(data);
-  }, [])
 
   return (
     <Box

@@ -2,11 +2,18 @@ import { Outlet } from "react-router-dom";
 import { Box } from "@mui/material";
 import { useGetSelectedSet } from "state/hooks/stateHooks/selectedSetState/useGetSelectedSet";
 import HeaderInfos from "components/HeaderInfos";
+import useSetSetsList from "state/hooks/stateHooks/setsListState/useSetSetsList";
+import { useEffect } from "react";
+import data from 'assets/data.json'
+
 
 const DefaultPage = () => {
+  const buildSets = useSetSetsList();
   const set = useGetSelectedSet();
 
-  console.log("renderizou o DefaultPage")
+  useEffect(() => {
+    buildSets(data);
+  }, [])
 
   return (
     <Box

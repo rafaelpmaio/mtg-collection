@@ -16,16 +16,11 @@ export const useHandleSelectorFilter = () => {
   const setFilteredSetsList = useSetFilteredSetsList();
   const setFilteredCardsList = useSetFilteredCardsList();
 
-  console.log("entrou no useHandleSelectorFilter")
-
-  console.log("cardslist do handle", cardsList)
-
   const filterOptions_sets: Record<string, SetsFilterFunction> = {
     All: () => setsList,
     Favorite: () => setsList.filter(collection => collection.collect),
     Completed: () => setsList.filter(collection => collection.isCompleted),
   };
-
 
   const filterOptions_cards: Record<string, CardsFilterFunction> = {
     All: () => cardsList,

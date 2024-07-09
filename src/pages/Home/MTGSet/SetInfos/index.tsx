@@ -8,8 +8,6 @@ interface SetInfosProps {
 
 export default function SetInfos({ set }: SetInfosProps) {
 
-    // incluir fireworks quando o set for completo react-fireworks parece bem simples
-
     return (
         <Stack direction="row">
             <CardMedia
