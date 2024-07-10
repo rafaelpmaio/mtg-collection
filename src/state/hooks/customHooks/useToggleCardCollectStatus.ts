@@ -22,6 +22,9 @@ export const useToggleCardCollectStatus = () => {
       card.id === updatedCard.id ? updatedCard : card
     )
 
+    console.log("updatedCardsList", updatedCardsList)
+    console.log("updatedCardsList2", cardsList)
+
     const collectedTotal = updatedCardsList.reduce((accumulator, card) => accumulator + Number(card.isCollected), 0);
     console.log("completed", collectedTotal === cardsList.length)
 
