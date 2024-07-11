@@ -8,7 +8,8 @@ import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useGetFilteredSetsList } from "state/hooks/stateHooks/filteredSetsListState/useGetFilteredSetsList";
-import { useSetFilteredCardsList } from "state/hooks/stateHooks/filteredCardsListState/useSetFilteredCardsList";
+import { useSetCardsList } from "state/hooks/stateHooks/cardsListState/useSetCardsList";
+import { useSetSelectedSet } from "state/hooks/stateHooks/selectedSetState/useSetSelectedSet";
 
 const options = [
   "All",
@@ -16,29 +17,31 @@ const options = [
   "Missing"
 ]
 
-//1º Cuidar do bug que faz uma carta ser adicionada na cardsList de outro set
 // 2º fazer com que o set seja encontrado ao atualizar a página
 // refazer lógica da requisição http para programar 30% dos isCollected para true e 30% favoritados, também aproveitar para mudar o "collect" para "favorite"
 // incluir fireworks quando o set for completo react-fireworks parece bem simples
 
 
 const SetPage = () => {
-  // const location = useLocation();
-  // const setName = location.pathname.slice(12).replace("%20", " ");
+  const location = useLocation();
+  const setName = location.pathname.slice(12).replace("%20", " ");
 
-  // const setsList = useGetFilteredSetsList();
-  // const setCardsList = useSetFilteredCardsList();
+  const setsList = useGetFilteredSetsList();
+
+  // aqui seta a cardsList e o handleFilter se encarrega de atualizar o filteredCardsList 
+  const setCardsList = useSetCardsList();
   const cardsList = useGetFilteredCardsList();
+  const setSelectedSet = useSetSelectedSet();
 
   const handleFilter = useHandleSelectorFilter();
 
 
-  // const set = setsList.find(set => set.name === setName);
-  // useEffect(() => {
-  //   set && setCardsList(set.cards);
-  //   console.log("entrou aqui setslist", setsList);
-  //   console.log("entrou aqui set", set && set);
-  // }, [set])
+  const set = setsList.find(set => set.name === setName);
+  useEffect(() => {
+    if (set) { setCardsList(set.cards); setSelectedSet(set) };
+    console.log("entrou aqui setslist", setsList);
+    console.log("entrou aqui set", set && set);
+  }, [set])
 
   const [showMore, setShowMore] = useState(0)
   const cardsShown = 20;

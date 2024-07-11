@@ -4,12 +4,14 @@ import { useGetSetsList } from "../stateHooks/setsListState/useGetSetsList";
 import ISet from "interfaces/ISet";
 import { useSetCardsList } from "../stateHooks/cardsListState/useSetCardsList";
 import { useGetCardsList } from "../stateHooks/cardsListState/useGetCardsList";
+import { useGetSelectedSet } from "../stateHooks/selectedSetState/useGetSelectedSet";
 
 export const useToggleCardCollectStatus = () => {
   const prevList = useGetSetsList();
   const cardsList = useGetCardsList();
   const updateSetsList = useSetSetsList();
   const updateCardsList = useSetCardsList();
+  const selectedSet = useGetSelectedSet();
 
   return (card: ICard, checked: boolean = false) => {
 
@@ -29,15 +31,12 @@ export const useToggleCardCollectStatus = () => {
     console.log("completed", collectedTotal === cardsList.length)
 
     const setsList: ISet[] = prevList.map((set) => {
-      if (set.id === set.id) {
+      if (set.id === selectedSet?.id) {
         set = {
           ...set,
           collectedCardsTotal: collectedTotal,
           isCompleted: collectedTotal === cardsList.length,
-          cards: [
-            ...set.cards,
-            updatedCard
-          ],
+          cards: updatedCardsList,
         };
         return set;
       }

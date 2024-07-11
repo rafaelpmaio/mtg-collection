@@ -17,8 +17,6 @@ export const useToggleFromFavorite = () => {
 
     updateSetsList([...setsList.slice(0, index), updatedSet, ...setsList.slice(index + 1)])
 
-
-
   }, [updateSetsList, setsList]
   )
 }
