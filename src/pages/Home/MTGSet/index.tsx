@@ -17,16 +17,7 @@ interface SetProps {
 }
 
 const MTGSet = ({ set, key }: SetProps) => {
-  const [favorite, setFavorite] = useState(set.collect);
-
-  // const props = useSpring(
-  //   {
-  //     from: { opacity: 1 },
-  //     to: { opacity: 0.8 },
-  //     config: { duration: 2000 },
-  //     loop: true,
-  //   }
-  // )
+  const [favorite, setFavorite] = useState(set.isFavorite);
 
   const toggleSetFromFavoriteList = useToggleFromFavorite();
   const setSelectedSet = useSetSelectedSet();
@@ -41,9 +32,6 @@ const MTGSet = ({ set, key }: SetProps) => {
   }, [favorite])
 
   return (
-    <animated.div 
-    // style={props} 
-    >
       <Card
         elevation={4}
         onClick={() => setSelectedSet(set)}
@@ -68,7 +56,6 @@ const MTGSet = ({ set, key }: SetProps) => {
                     checked={favorite}
                     icon={<StarOutlineIcon />}
                     checkedIcon={<StarIcon sx={{ color: '#FFD700' }} />}
-                    color="primary"
                     onChange={handleChange}
                   />} />
                 </CardActions>
@@ -77,9 +64,6 @@ const MTGSet = ({ set, key }: SetProps) => {
           }
         </Stack>
       </Card >
-    </animated.div >
-
-
   );
 };
 

@@ -26,7 +26,6 @@ export const useRequestScryfallData = () => {
           prices: data.prices,
           images: data.image_uris,
         };
-        console.log("nova requisição feita", scryfallCard)
         setScryfallCard(scryfallCard);
       }).catch(error => console.error("Failed to request Scryfall card data", error));
 

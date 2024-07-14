@@ -12,7 +12,7 @@ export const useToggleFromFavorite = () => {
 
     const updatedSet: ISet = {
       ...setsList[index],
-      collect: checkStatus
+      isFavorite: checkStatus
     }
 
     updateSetsList([...setsList.slice(0, index), updatedSet, ...setsList.slice(index + 1)])

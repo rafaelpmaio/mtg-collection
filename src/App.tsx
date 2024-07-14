@@ -6,10 +6,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <BrowserRouter>
-      <ToastContainer closeOnClick={true}/>
-      <AppRoutes />
-    </BrowserRouter>
+      <BrowserRouter>
+        <ToastContainer closeOnClick={true} />
+        <AppRoutes />
+      </BrowserRouter>
   );
 }
 

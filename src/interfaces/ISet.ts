@@ -8,7 +8,7 @@ export default interface ISet {
   collectedCardsTotal: number;
   releaseDate?: string;
   block?: string; //the block name the set is
-  collect: boolean;
+  isFavorite: boolean;
   isCompleted: boolean;
   cards: ICard[];
 }

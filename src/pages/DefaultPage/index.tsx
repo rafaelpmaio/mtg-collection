@@ -5,6 +5,7 @@ import HeaderInfos from "components/HeaderInfos";
 import useSetSetsList from "state/hooks/stateHooks/setsListState/useSetSetsList";
 import { useEffect } from "react";
 import data from 'assets/data.json'
+import { Navbar } from "components/Navbar";
 
 
 const DefaultPage = () => {
@@ -16,22 +17,25 @@ const DefaultPage = () => {
   }, [])
 
   return (
-    <Box
-      component="main"
-      sx={{ padding: "10px" }}
-    >
+    <>
+      <Navbar />
       <Box
-        height={100}
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        textAlign="center"
-        component="section"
+        component="main"
+        sx={{ padding: "10px" }}
       >
-        <HeaderInfos set={set} />
-      </Box>
-      <Outlet />
-    </Box >
+        <Box
+          height={100}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          textAlign="center"
+          component="section"
+        >
+          <HeaderInfos set={set} />
+        </Box>
+        <Outlet />
+      </Box >
+    </>
   );
 };
 

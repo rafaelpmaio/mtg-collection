@@ -1,12 +1,9 @@
 import { LinearProgress } from "@mui/joy";
 import { CardContent, CardMedia, Stack, Typography } from "@mui/material";
 import ISet from "interfaces/ISet";
+import 'styles/abstract/_vars.css';
 
-interface SetInfosProps {
-    set: ISet
-}
-
-export default function SetInfos({ set }: SetInfosProps) {
+export default function SetInfos({ set }: { set: ISet }) {
 
     return (
         <Stack direction="row" >
@@ -39,10 +36,9 @@ export default function SetInfos({ set }: SetInfosProps) {
                     variant="solid"
                     determinate
                     thickness={17}
-                    color="primary"
                     value={Math.round((set.collectedCardsTotal / set.totalSetSize) * 100)}
                     sx={{
-                        borderRadius:"2px"
+                        borderRadius: "2px",
                     }}
                 >
                     <Typography
@@ -51,7 +47,7 @@ export default function SetInfos({ set }: SetInfosProps) {
                         padding={0}
                         fontSize={12}
                         color="white"
-                        sx={{ mixBlendMode: 'difference' }}
+                        sx={{ mixBlendMode: 'screen' }}
                     >{Math.round((set.collectedCardsTotal / set.totalSetSize) * 100)}%</Typography>
 
                 </LinearProgress>

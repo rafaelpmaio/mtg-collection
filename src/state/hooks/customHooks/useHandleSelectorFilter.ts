@@ -18,7 +18,7 @@ export const useHandleSelectorFilter = () => {
 
   const filterOptions_sets: Record<string, SetsFilterFunction> = {
     All: () => setsList,
-    Favorite: () => setsList.filter(collection => collection.collect),
+    Favorite: () => setsList.filter(collection => collection.isFavorite),
     Completed: () => setsList.filter(collection => collection.isCompleted),
   };
 

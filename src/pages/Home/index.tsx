@@ -32,7 +32,6 @@ const Home = () => {
         gridTemplateColumns="repeat(auto-fill, minmax(min(100%, max(280px, 100%/5 - 0.5rem)), 1fr))"
         gap="0.5rem"
       >
-
         {
           setsList.slice(0, showMore).map((set) => (
             <MTGSet set={set} key={set.id} />
