@@ -1,39 +1,41 @@
 import { Stack, Typography } from "@mui/material"
 import ISet from "interfaces/ISet"
-import { useLocation } from "react-router-dom";
-import { useGetScryfallCardsListData } from "state/hooks/stateHooks/scryfallCardsListDataState/useGetScryfallCardsListData";
-import { calculateTotalSetCost } from "utils/calculateTotalSetCost";
+import { useState } from "react";
+import Confetti from 'react-confetti';
+import { useWindowSize } from "react-use";
 
 interface HeaderInfosProps {
     set: ISet | null
 }
 
 const HeaderInfos = ({ set }: HeaderInfosProps) => {
-    const pathname = useLocation().pathname;
-    const scryfallData = useGetScryfallCardsListData();
+    const { width, height } = useWindowSize()
+    const [recycle, setRecycle] = useState(true)
+
+    setTimeout(() => {
+        setRecycle(false)
+    }, 6000)
 
     return (
-        <Stack spacing={1}>
-            <Typography
-                variant="h4"
-                component="h1"
-                sx={{ fontFamily: "inherit" }}>
-                {set?.name}
-            </Typography>
-            <Typography variant="body1"> Collected:
-                <b>
-                    {set?.collectedCardsTotal} /{set?.totalSetSize}
-                </b>
-            </Typography>
-            {String(pathname).includes("/collection")
-                &&
-                <Typography> Total Set Cost: US$
+        <>
+            {set?.isCompleted &&
+                <Confetti width={width} height={height} numberOfPieces={500} recycle={recycle} />
+            }
+            <Stack spacing={1}>
+                <Typography
+                    variant="h4"
+                    component="h1"
+                    fontFamily="inherit"
+                >
+                    {set?.name}
+                </Typography>
+                <Typography variant="body1"> Collected:
                     <b>
-                        {set && calculateTotalSetCost(set, scryfallData)}
+                        {set?.collectedCardsTotal} /{set?.totalSetSize}
                     </b>
                 </Typography>
-            }
-        </Stack>
+            </Stack>
+        </>
     )
 }
 

@@ -15,12 +15,6 @@ const options = [
   "Missing"
 ]
 
-// fazer com que o número de coletados atualize automáticamente
-//melhorar css dos sets
-// refazer lógica da requisição http para programar 30% dos isCollected para true e 30% favoritados, também aproveitar para mudar o "collect" para "favorite"
-// incluir fireworks quando o set for completo react-fireworks parece bem simples
-
-
 const SetPage = () => {
 
   const setsList = useGetSetsList();
@@ -51,6 +45,7 @@ const SetPage = () => {
       textAlign="center"
     >
       <DropdownMenu handleFilter={handleFilter} options={options} />
+
       <Box
         sx={{
           display: "grid",

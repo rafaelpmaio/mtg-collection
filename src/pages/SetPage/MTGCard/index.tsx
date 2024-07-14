@@ -12,7 +12,6 @@ const MTGCard = ({ card }: CardProps) => {
 
   const [collected, setCollected] = useState(card.isCollected)
   const toggleCardCollectStatus = useToggleCardCollectStatus();
-  console.log("carta regarregada", card)
 
   return (
     <Card

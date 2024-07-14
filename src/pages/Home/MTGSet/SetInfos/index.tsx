@@ -9,7 +9,7 @@ interface SetInfosProps {
 export default function SetInfos({ set }: SetInfosProps) {
 
     return (
-        <Stack direction="row">
+        <Stack direction="row" >
             <CardMedia
                 component="i"
                 className={`ss ss-${set.image} ss-2x  ${set.isCompleted ? "ss-rare" : "ss-common"}`}
@@ -17,19 +17,33 @@ export default function SetInfos({ set }: SetInfosProps) {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    margin: "10px"
+                    margin: "10px",
                 }}
             />
             <CardContent sx={{
                 width: "100%",
             }}>
-                <Typography variant="body2" marginBottom={1} >{set.name}</Typography>
+                <Typography
+                    variant="body2"
+                    marginBottom={1}
+                    fontFamily="inherit"
+                    color="#3E001F"
+                    fontWeight="bold"
+                    whiteSpace="nowrap"
+                    overflow="hidden"
+                    textOverflow="ellipsis"
+                >
+                    {set.name}
+                </Typography>
                 <LinearProgress
                     variant="solid"
                     determinate
                     thickness={17}
                     color="primary"
                     value={Math.round((set.collectedCardsTotal / set.totalSetSize) * 100)}
+                    sx={{
+                        borderRadius:"2px"
+                    }}
                 >
                     <Typography
                         variant="body2"

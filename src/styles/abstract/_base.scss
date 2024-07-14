@@ -1,6 +1,8 @@
 @import './vars';
 
-html, body {
+html,
+body,
+a {
     font-family: $main-font;
     min-height: 100vh;
     color: $font-color;

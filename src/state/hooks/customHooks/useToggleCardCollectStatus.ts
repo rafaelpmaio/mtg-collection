@@ -5,6 +5,7 @@ import ISet from "interfaces/ISet";
 import { useSetCardsList } from "../stateHooks/cardsListState/useSetCardsList";
 import { useGetCardsList } from "../stateHooks/cardsListState/useGetCardsList";
 import { useGetSelectedSet } from "../stateHooks/selectedSetState/useGetSelectedSet";
+import { useSetSelectedSet } from "../stateHooks/selectedSetState/useSetSelectedSet";
 
 export const useToggleCardCollectStatus = () => {
   const prevList = useGetSetsList();
@@ -12,6 +13,7 @@ export const useToggleCardCollectStatus = () => {
   const updateSetsList = useSetSetsList();
   const updateCardsList = useSetCardsList();
   const selectedSet = useGetSelectedSet();
+  const updateSelectedSet = useSetSelectedSet()
 
   return (card: ICard, checked: boolean = false) => {
 
@@ -38,7 +40,9 @@ export const useToggleCardCollectStatus = () => {
           isCompleted: collectedTotal === cardsList.length,
           cards: updatedCardsList,
         };
+        updateSelectedSet(set)
         return set;
+
       }
       return set;
     })
