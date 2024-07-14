@@ -6,7 +6,7 @@ import 'styles/abstract/_vars.css';
 export default function SetInfos({ set }: { set: ISet }) {
 
     return (
-        <Stack direction="row" >
+        <Stack direction={{ xs: "column", sm: "row" }} >
             <CardMedia
                 component="i"
                 className={`ss ss-${set.image} ss-2x  ${set.isCompleted ? "ss-rare" : "ss-common"}`}
@@ -17,9 +17,21 @@ export default function SetInfos({ set }: { set: ISet }) {
                     margin: "10px",
                 }}
             />
-            <CardContent sx={{
-                width: "100%",
-            }}>
+            <CardContent
+                sx={{
+                    width: {
+                        xs: "auto",
+                        sm: "100%"
+                    },
+                    padding: {
+                        xs: "0 5px",
+                        sm: "16px 16px 24px"
+                    }, 
+                    "&:last-child": {
+                       xs:{ paddingBottom: 0},
+                       sm:{ paddingBottom: "24px"},
+                    }
+                }}>
                 <Typography
                     variant="body2"
                     marginBottom={1}

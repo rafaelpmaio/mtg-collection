@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material"
+import { Box, Icon, Stack, Typography } from "@mui/material"
 import ISet from "interfaces/ISet"
 import { useState } from "react";
 import Confetti from 'react-confetti';
@@ -21,21 +21,40 @@ const HeaderInfos = ({ set }: HeaderInfosProps) => {
 
     setTimeout(() => {
         setRecycle(false)
-    }, 6000)
+    }, 7000)
 
     return (
         path.includes("collection/")
             ?
             <>
                 {set?.isCompleted &&
-                    <Confetti width={width} height={height} numberOfPieces={500} recycle={recycle} />}
+                    <Confetti width={width} height={height} numberOfPieces={200} recycle={recycle} />}
                 <Stack spacing={1}>
-                    <Stack direction="row" spacing={2}>
-                        <i className={`ss ss-${set?.image} ss-2x  ${set?.isCompleted ? "ss-rare" : "ss-common"}`} />
+                    <Stack
+                        direction="row"
+                        spacing={2}
+                    >
+                        <Icon className={`ss ss-${set?.image} ss-2x  ${set?.isCompleted ? "ss-rare" : "ss-common"}`}
+                            sx={{
+                                alignSelf: "center",
+                            }} />
                         <Typography
-                            variant="h4"
                             component="h1"
                             fontFamily="inherit"
+                            display="inline-block"
+                            whiteSpace="nowrap"
+                            width={{xs:"250px", sm:"auto"}}
+                            fontWeight={{
+                                xs: "600",
+                                sm: "500",
+                            }}
+                            sx={{
+                                fontSize: {
+                                    xs: "25px",
+                                    sm: "32px"
+                                },
+                                overflowX: "auto",
+                            }}
                         >
                             {set?.name}
                         </Typography>
@@ -49,9 +68,18 @@ const HeaderInfos = ({ set }: HeaderInfosProps) => {
             </>
             : <Stack spacing={1}>
                 <Typography
-                    variant="h4"
                     component="h1"
                     fontFamily="inherit"
+                    fontWeight={{
+                        xs: "600",
+                        sm: "500",
+                    }}
+                    sx={{
+                        fontSize: {
+                            xs: "25px",
+                            sm: "32px"
+                        },
+                    }}
                 >
                     Let's Keep Grinding!
                 </Typography>

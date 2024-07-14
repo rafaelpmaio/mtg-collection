@@ -46,12 +46,12 @@ const SetPage = () => {
     >
       <DropdownMenu handleFilter={handleFilter} options={options} />
       <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, max(230px, 100%/5 - 0.5rem)), 1fr))", //0.5 refers to column gap
-          gap: "2rem .5rem",
-          justifyItems: "center"
-        }}>
+        display="grid"
+        gridTemplateColumns= "repeat(auto-fit, minmax(min(100%, max(230px, 100%/5 - 0.5rem)), 1fr))"
+        //0.5 refers to column gap
+        gap="2rem .5rem"
+        justifyItems="center"
+      >
         {cardsList.slice(showMore, showMore + cardsShown)
           .map((card) => (
             <MTGCard key={card.id} card={card} />

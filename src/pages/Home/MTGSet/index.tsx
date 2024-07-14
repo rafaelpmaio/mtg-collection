@@ -32,38 +32,44 @@ const MTGSet = ({ set, key }: SetProps) => {
   }, [favorite])
 
   return (
-      <Card
-        elevation={4}
-        onClick={() => setSelectedSet(set)}
-        key={key}
-        sx={{
-          maxHeighth: "80px",
-          minWidth: "280px",
-          maxWidth: "325px",
-          filter: !favorite ? "grayscale(100%)" : "",
-        }}
-      >
-        <Stack direction="row">
-          {
-            set
-              ? <>
-                <Link to={`/collection/${set.name}`} style={{ width: "100%" }} onClick={() => setCardsList(set.cards)}>
-                  <SetInfos set={set} />
-
-                </Link>
-                <CardActions>
-                  <FormControlLabel sx={{ margin: "auto" }} label control={<Checkbox
-                    checked={favorite}
-                    icon={<StarOutlineIcon />}
-                    checkedIcon={<StarIcon sx={{ color: '#FFD700' }} />}
-                    onChange={handleChange}
-                  />} />
-                </CardActions>
-              </>
-              : <Skeleton variant="rectangular" height={70} width="100%" animation="wave" />
-          }
-        </Stack>
-      </Card >
+    <Card
+      elevation={4}
+      onClick={() => setSelectedSet(set)}
+      key={key}
+      sx={{
+        maxHeighth: "80px",
+        minWidth: {
+          xs: "150px",
+          sm: "280px"
+        },
+        maxWidth: {
+          xs: "150px",
+          sm: "325px"
+        },
+        filter: !favorite ? "grayscale(100%)" : "",
+      }
+      }
+    >
+      <Stack direction={{ xs: "column", sm: "row" }}>
+        {
+          set
+            ? <>
+              <Link to={`/collection/${set.name}`} style={{ width: "100%" }} onClick={() => setCardsList(set.cards)}>
+                <SetInfos set={set} />
+              </Link>
+              <CardActions>
+                <FormControlLabel sx={{ margin: "auto" }} label control={<Checkbox
+                  checked={favorite}
+                  icon={<StarOutlineIcon />}
+                  checkedIcon={<StarIcon sx={{ color: '#FFD700' }} />}
+                  onChange={handleChange}
+                />} />
+              </CardActions>
+            </>
+            : <Skeleton variant="rectangular" height={70} width="100%" animation="wave" />
+        }
+      </Stack>
+    </Card >
   );
 };
 

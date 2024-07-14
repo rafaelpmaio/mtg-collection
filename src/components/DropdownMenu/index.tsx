@@ -27,7 +27,8 @@ const DropdownMenu = ({ handleFilter, options }: DropdownMenuProps) => {
       value={option}
       sx={{
         width: 200,
-        marginBottom: 2
+        marginBottom: 2,
+        marginTop:2
       }}
     >
       {options.map((opt: string) => (

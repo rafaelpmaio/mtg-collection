@@ -27,10 +27,17 @@ const Home = () => {
     >
       <DropdownMenu handleFilter={handleFilter} options={options} />
       <Box
-        marginBottom={2}
         display="grid"
-        gridTemplateColumns="repeat(auto-fill, minmax(min(100%, max(280px, 100%/5 - 0.5rem)), 1fr))"
+        gridTemplateColumns={{
+          xs:"repeat(auto-fit, minmax(min(100%, max(150px, 100%/5 - 0.5rem)), 1fr))",
+          sm:"repeat(auto-fit, minmax(min(100%, max(280px, 100%/5 - 0.5rem)), 1fr))"
+        }}
         gap="0.5rem"
+        justifyItems={{
+          xs:"center",
+          sm:"stretch"
+        }}
+        marginBottom={2}
       >
         {
           setsList.slice(0, showMore).map((set) => (
