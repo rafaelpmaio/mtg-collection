@@ -1,7 +1,6 @@
 import { LinearProgress } from "@mui/joy";
-import { CardContent, CardMedia, Stack, Typography } from "@mui/material";
+import { CardContent, CardMedia, Stack, Tooltip, Typography } from "@mui/material";
 import ISet from "interfaces/ISet";
-import 'styles/abstract/_vars.css';
 
 export default function SetInfos({ set }: { set: ISet }) {
 
@@ -26,10 +25,10 @@ export default function SetInfos({ set }: { set: ISet }) {
                     padding: {
                         xs: "0 5px",
                         sm: "16px 16px 24px"
-                    }, 
+                    },
                     "&:last-child": {
-                       xs:{ paddingBottom: 0},
-                       sm:{ paddingBottom: "24px"},
+                        xs: { paddingBottom: 0 },
+                        sm: { paddingBottom: "24px" },
                     }
                 }}>
                 <Typography
@@ -44,25 +43,27 @@ export default function SetInfos({ set }: { set: ISet }) {
                 >
                     {set.name}
                 </Typography>
-                <LinearProgress
-                    variant="solid"
-                    determinate
-                    thickness={17}
-                    value={Math.round((set.collectedCardsTotal / set.totalSetSize) * 100)}
-                    sx={{
-                        borderRadius: "2px",
-                    }}
-                >
-                    <Typography
-                        variant="body2"
-                        margin={0}
-                        padding={0}
-                        fontSize={12}
-                        color="white"
-                        sx={{ mixBlendMode: 'screen' }}
-                    >{Math.round((set.collectedCardsTotal / set.totalSetSize) * 100)}%</Typography>
+                <Tooltip title={`${set.collectedCardsTotal}/${set.cards.length}`} placement="bottom" arrow>
+                    <LinearProgress
+                        variant="solid"
+                        determinate
+                        thickness={17}
+                        value={Math.round((set.collectedCardsTotal / set.totalSetSize) * 100)}
+                        sx={{
+                            borderRadius: "2px",
+                        }}
+                    >
+                        <Typography
+                            variant="body2"
+                            margin={0}
+                            padding={0}
+                            fontSize={12}
+                            color="white"
+                            sx={{ mixBlendMode: 'screen' }}
+                        >{Math.round((set.collectedCardsTotal / set.totalSetSize) * 100)}%</Typography>
 
-                </LinearProgress>
+                    </LinearProgress>
+                </Tooltip>
             </CardContent>
         </Stack>
     )

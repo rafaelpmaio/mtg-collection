@@ -89,9 +89,6 @@ const HeaderInfos = ({ set }: HeaderInfosProps) => {
                     </b>
                 </Typography>
             </Stack>
-
-        // {set?.isCompleted && <Confetti width={width} height={height} numberOfPieces={500} recycle={recycle} />}
-
     )
 }
 

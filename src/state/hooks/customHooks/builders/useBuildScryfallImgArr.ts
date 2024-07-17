@@ -19,7 +19,6 @@ export const useBuildScryfallImgArr = () => {
       return;
     }
 
-    //não está funcionando como deveria, rever a lógica
     // if (!setsInMemory.includes(selectedSet.id)) {
     const loading = toast.loading('give me a minute to load the cards!')
     const scryfallCardArray: Promise<IScryfallData>[] = cardsList.map(
